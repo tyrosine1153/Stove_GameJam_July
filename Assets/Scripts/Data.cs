@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Data
 {
-    public enum ICE { IDLE, MILK }
-    public enum SYRUP { RED, BULE }
-    public enum TOPPING { CHOCOLATE, ALMOND }
+    public enum ICE { NONE, WATER, STRAWBERRY_MILK, WHITE_MILK, CHOCO_MILK, MINTCHOCO_MILK, SEAWATER }
+    public enum SYRUP { NONE, RED, YELLOW, BLUE, WHITE, ORANGE, PINK, PURPLE, SKYBLUE }
+    public enum TOPPING { NONE, CHOCOLATE, STRAWBERRY, LEMON, REDBEAN, FRUIT_COCK, ALMOND }
     public class StageJson
     {
         public int mermaidCount;
