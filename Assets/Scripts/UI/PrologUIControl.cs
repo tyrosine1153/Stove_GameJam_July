@@ -12,6 +12,11 @@ public class PrologUIControl : MonoBehaviour
         _playableDirector = GetComponent<PlayableDirector>();
     }
 
+    public void PlayProlog()
+    {
+        _playableDirector.Play();
+    }
+
     public void StopProlog()
     {
         _playableDirector.time = 540;
