@@ -7,4 +7,9 @@ public class Data
     public enum ICE { IDLE, MILK }
     public enum SYRUP { RED, BULE }
     public enum TOPPING { CHOCOLATE, ALMOND }
+    public class StageJson
+    {
+        public int mermaidCount;
+        public int IceCount;
+    }
 }

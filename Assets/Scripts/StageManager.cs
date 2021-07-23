@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageJson
-{
-    public int mermaidCount;
-    public int IceCount;
-}
 
 
 public class StageManager : MonoBehaviour
@@ -24,6 +19,13 @@ public class StageManager : MonoBehaviour
     Data.ICE selectedIce;
     Data.SYRUP selectedSyrup;
     Data.TOPPING selectedTopping;
+
+    public static StageManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -66,19 +68,19 @@ public class StageManager : MonoBehaviour
     // 얼음 선택 시 UI 연결
     void SelectIce()
     {
-        //selectedIce = 
+        //selectedIce = ???
     }
 
     // 시럽 선택 시 UI 연결
     void SelectSyrup()
     {
-        //selectedSyrup = 
+        //selectedSyrup = ???
     }
 
     // 토핑 선택 시 UI 연결
     void SelectTopping()
     {
-        //selectedTopping = 
+        //selectedTopping = ???
     }
 
     //종 누르는 UI 연결하면 됩니다
