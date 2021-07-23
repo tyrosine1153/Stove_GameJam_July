@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a1899d8b5494babb656890586385c2, type: 3}
+  m_Name: IngredientGameDatas
+  m_EditorClassIdentifier: 
+  IceDatas:
+  - IceType: 1
+    IngredientGameData:
+      DisplayName: "\uBB3C"
+      ResultSprite: {fileID: 21300000, guid: 31b97ad9b8599440788bdfe47c61d440, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - IceType: 6
+    IngredientGameData:
+      DisplayName: "\uBC14\uB2F7\uBB3C"
+      ResultSprite: {fileID: 21300000, guid: a4fb6da5f1a3e45ab9f167ca65ae1f09, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 200
+  - IceType: 3
+    IngredientGameData:
+      DisplayName: "\uD770 \uC6B0\uC720"
+      ResultSprite: {fileID: 21300000, guid: 56d150274af6643b490ed81baaf313d6, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 350
+  - IceType: 5
+    IngredientGameData:
+      DisplayName: "\uBBFC\uD2B8\uCD08\uCF54 \uC6B0\uC720"
+      ResultSprite: {fileID: 21300000, guid: 947d10e0d096f422c9c8b14b31fced29, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 750
+  - IceType: 4
+    IngredientGameData:
+      DisplayName: "\uCD08\uCF54 \uC6B0\uC720"
+      ResultSprite: {fileID: 21300000, guid: 3196db80f9b7a48479e77d320bb75ced, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 1300
+  - IceType: 2
+    IngredientGameData:
+      DisplayName: "\uB538\uAE30 \uC6B0\uC720"
+      ResultSprite: {fileID: 21300000, guid: b0dbde60d6a814bc4832acab404ace42, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 2700
+  SyrupDatas:
+  - SyrupType: 1
+    IngredientGameData:
+      DisplayName: "\uBE68\uAC15"
+      ResultSprite: {fileID: 21300000, guid: e2a7c20ff82bb4fbeb29c74bc860708c, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 2
+    IngredientGameData:
+      DisplayName: "\uB178\uB791"
+      ResultSprite: {fileID: 21300000, guid: 0ab32373cb5844477b40b02be3c88d60, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 3
+    IngredientGameData:
+      DisplayName: "\uD30C\uB791"
+      ResultSprite: {fileID: 21300000, guid: ca87fa2966a9d42cca6406c2550a5b75, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 4
+    IngredientGameData:
+      DisplayName: "\uD558\uC591"
+      ResultSprite: {fileID: 21300000, guid: b5d72faecd9b84797b09beb67cafea73, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 5
+    IngredientGameData:
+      DisplayName: "\uC8FC\uD669"
+      ResultSprite: {fileID: 21300000, guid: 5fc81854badf74c3dac89d5253fa3f64, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 6
+    IngredientGameData:
+      DisplayName: "\uBD84\uD64D"
+      ResultSprite: {fileID: 21300000, guid: f712b1e8d64a9430ca72c4670cc49419, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 7
+    IngredientGameData:
+      DisplayName: "\uBCF4\uB77C"
+      ResultSprite: {fileID: 21300000, guid: 934d94544a74848b58cb34eb435e61ad, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 8
+    IngredientGameData:
+      DisplayName: "\uD558\uB298"
+      ResultSprite: {fileID: 21300000, guid: 0bd4257f881a746a6b45ed2cd69f4e08, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  ToppingDatas:
+  - ToppingType: 6
+    IngredientGameData:
+      DisplayName: "\uC544\uBAAC\uB4DC"
+      ResultSprite: {fileID: 21300000, guid: 32e89f4983cb840dca9e250931dcff0c, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - ToppingType: 4
+    IngredientGameData:
+      DisplayName: "\uD325"
+      ResultSprite: {fileID: 21300000, guid: 59abfa4429e5348e8aa0a7b45a7b6342, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 200
+  - ToppingType: 5
+    IngredientGameData:
+      DisplayName: "\uD6C4\uB974\uCE20 \uCE75\uD14C\uC77C"
+      ResultSprite: {fileID: 21300000, guid: 05f55cbce2cbe427bbeee2c56a077b93, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 350
+  - ToppingType: 3
+    IngredientGameData:
+      DisplayName: "\uB808\uBAAC"
+      ResultSprite: {fileID: 21300000, guid: c6e45bc42140a4a008a9a530d08fff31, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 750
+  - ToppingType: 1
+    IngredientGameData:
+      DisplayName: "\uCD08\uCF5C\uB9BF"
+      ResultSprite: {fileID: 21300000, guid: c886d9b3d7bd54629bf61b561058821c, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 1300
+  - ToppingType: 2
+    IngredientGameData:
+      DisplayName: "\uB538\uAE30"
+      ResultSprite: {fileID: 21300000, guid: 0deb2cf1e4a4f42a88f7bea1f5ba45b8, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 2700
