@@ -11,6 +11,8 @@ public static class SyrupColorMix
         {(Data.SYRUP.RED, Data.SYRUP.WHITE), Data.SYRUP.PINK },
         {(Data.SYRUP.RED, Data.SYRUP.BLUE), Data.SYRUP.PURPLE },
         {(Data.SYRUP.BLUE, Data.SYRUP.WHITE), Data.SYRUP.SKYBLUE },
+        {(Data.SYRUP.YELLOW, Data.SYRUP.BLUE), Data.SYRUP.GREEN },
+        {(Data.SYRUP.YELLOW, Data.SYRUP.WHITE), Data.SYRUP.LEMON },
     };
 
     public static bool TryGetMixedSyrup(Data.SYRUP syrup1, Data.SYRUP syrup2, out Data.SYRUP resultSyrup)
