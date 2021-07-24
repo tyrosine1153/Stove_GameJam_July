@@ -7,6 +7,8 @@ public class PrologUIControl2 : MonoBehaviour
 {
     [SerializeField] 
     private GameObject[] prologPages;
+    [SerializeField] 
+    private int onEndPrologAudio;    
     
     private int _pageCount;
 
@@ -33,6 +35,7 @@ public class PrologUIControl2 : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            AudioManager.Instance.FadeIn(onEndPrologAudio);
         }
         
     }
@@ -40,5 +43,6 @@ public class PrologUIControl2 : MonoBehaviour
     public void SkipPages()
     {
         gameObject.SetActive(false);
+        AudioManager.Instance.FadeIn(onEndPrologAudio);
     }
 }
