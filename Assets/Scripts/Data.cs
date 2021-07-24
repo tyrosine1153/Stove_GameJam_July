@@ -15,7 +15,12 @@ public class Data
     [System.Serializable]
     public class StageJson
     {
-        public int IceCount;
-        public int mermaidCount;
+        public int Day;
+        public int mermaid_one;
+        public int mermaid_two;
+        public int mermaid_three;
+        public int mermaid_four;
+        public int mermaid_five;
+        public int ice_one;
     }
 }

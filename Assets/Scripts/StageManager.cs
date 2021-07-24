@@ -1,9 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+[CustomEditor(typeof(StageManager))]
+public class DuckGenerateButton : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
 
-
+        StageManager generator = (StageManager)target;
+        if (GUILayout.Button("Open Store"))
+        {
+            for(int i = 0; i < 1000; i++)
+                generator.OpenStore();
+        }
+    }
+}
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
@@ -13,13 +27,19 @@ public class StageManager : MonoBehaviour
     [Header("json파일")]
     public TextAsset jsonFile;
 
-    private Data.StageJson[] stage;
+    public Data.StageJson[] stage;
 
     private int mermaidCount;
-    private int day = 0;    //0일차부터 29일차까지 30일
+    public int day = 0;    //0일차부터 29일차까지 30일
     private bool IsGuest = false;
     private int hp = 3;
     private float time = 0;
+
+    public int one = 0;
+    public int two = 0;
+    public int three = 0;
+    public int four = 0;
+    public int five = 0;
 
     Data.ICE selectedIce;
     Data.SYRUP selectedSyrup;
@@ -51,12 +71,78 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    //Open UI 연결하면 됩니다
-    void OpenStore()
+    void SetLevel()
     {
-        mermaidCount = stage[day].mermaidCount;
-        mermaid.bingsuCount = stage[day].IceCount;
+        int total = 0;
+        int day_index = 0;
+        for (int i = 0; i < stage.Length; i++)
+        {
+            if (day + 1 < stage[i].Day)
+            {
+                day_index = i;
+                break;
+            }
+        }
+
+        List<int> list = new List<int>();
+        list.Add(stage[day_index].mermaid_one);
+        list.Add(stage[day_index].mermaid_two);
+        list.Add(stage[day_index].mermaid_three);
+        list.Add(stage[day_index].mermaid_four);
+        list.Add(stage[day_index].mermaid_five);
+        int selectNum = Random.Range(1, 101);
+
+        List<int> index = new List<int>();
+        index.Add(0);
+        index.Add(1);
+        index.Add(2);
+        index.Add(3);
+        index.Add(4);
+
+        while (index.Count > 0)
+        {
+            int rnd = Random.Range(0, index.Count);
+            total += list[index[rnd]];
+            if (total >= selectNum)
+            {
+                mermaidCount = index[rnd] + 1;
+                break;
+            }
+            index.RemoveAt(rnd);
+        }
+
+        //For Debuging
+        switch (mermaidCount)
+        {
+            case 1:
+                one++;
+                break;
+            case 2:
+                two++;
+                break;
+            case 3:
+                three++;
+                break;
+            case 4:
+                four++;
+                break;
+            case 5:
+                five++;
+                break;
+
+        }
+    }
+
+    //Open UI 연결하면 됩니다
+    public void OpenStore()
+    {
+        SetLevel();
+
+        //mermaidCount = stage[day].mermaidCount;
+        //mermaid.bingsuCount = stage[day].IceCount;
         // UI창에서는 Day + 1로 계산
+        
+        
         StartCoroutine("guestCome");
     }
     void CloseStore()
@@ -79,11 +165,14 @@ public class StageManager : MonoBehaviour
         int index = 0;
         while (mermaidCount > index)    //Day 종료 조건, json 수치에 따라
         {
-            IsGuest = true;
-            //UI(쌓인 빙수 등) 초기화
-            time = 0;
+            //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경 
             mermaid.Setting(day);
-            //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 원하는 빙수 변경 - mermaid.Setting()에서 
+
+            //손님 들어옴, 타이머 시작
+            IsGuest = true;
+            time = 0;
+
+            //UI(쌓인 빙수 등) 초기화
             //선택한 아이템 초기화
             yield return waitWhile;
             yield return waitForSeconds;    //잠시 손님이 가기 직전에 대기

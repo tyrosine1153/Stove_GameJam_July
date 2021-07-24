@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class ExpressionSprites
 {
-    public Sprite[] sprites;
+    public Sprite[] expression;
 }
 
 public class Mermaid : MonoBehaviour
@@ -33,16 +33,33 @@ public class Mermaid : MonoBehaviour
     }
 
     // level에 따라 난이도 증가
-    public void Setting(int level)
+    public void Setting(int day)
     {
-        //빙수 
+        //빙수 개수
+        int day_index = 0;
+        for (int i = 0; i < StageManager.instance.stage.Length; i++)
+        {
+            if (day + 1 < StageManager.instance.stage[i].Day)
+            {
+                day_index = i;
+                break;
+            }
+        }
+        int selectNum = Random.Range(1, 101);
+        if (StageManager.instance.stage[day_index].ice_one >= selectNum)
+            bingsuCount = 1;
+        else
+            bingsuCount = 2;
+
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
         SetExpression(EXPRESSION.IDLE);
-        //Level에 따른 ice, topping 선택
+        
+        
+        //해금된 재료에 따라 ice, 시럽, topping 등 선택
     }
 
     public void SetExpression(EXPRESSION expression)
     {
-        image.sprite = mermaidSpriteList[mermaidIndex].sprites[((int)expression)];
+        image.sprite = mermaidSpriteList[mermaidIndex].expression[((int)expression)];
     }
 }
