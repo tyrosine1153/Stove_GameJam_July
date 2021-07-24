@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 {
     public Text costTxt;
     public Image lockImg;
+    public Image img;
     public GameObject costBtn;
 
     private bool isShaking = false;
@@ -24,8 +25,9 @@ public class Item : MonoBehaviour
         
     //}
 
-    public void setItem(int cost, bool isLock)
+    public void setItem(Sprite sprite, int cost, bool isLock)
     {
+        this.img.sprite = sprite;
         this.isLock = isLock;
         lockImg.enabled = this.isLock;
         if (cost == 0)

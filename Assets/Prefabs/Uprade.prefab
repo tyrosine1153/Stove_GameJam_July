@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 160, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8530208159624362042
 CanvasRenderer:
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costTxt: {fileID: 3474071331867357140}
   lockImg: {fileID: 9063377818617345672}
+  img: {fileID: 7476220302847752740}
   costBtn: {fileID: 5244626339703049045}
 --- !u!1 &5244626339703049045
 GameObject:
@@ -129,7 +130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -64.5}
+  m_AnchoredPosition: {x: 0, y: -76}
   m_SizeDelta: {x: 160, y: 49.5503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5854833208680878166
@@ -317,7 +318,7 @@ GameObject:
   - component: {fileID: 5323532032315254823}
   - component: {fileID: 9063377818617345672}
   m_Layer: 5
-  m_Name: Image
+  m_Name: LockImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,7 +341,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5323532032315254823
 CanvasRenderer:

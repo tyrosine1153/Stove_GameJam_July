@@ -33,7 +33,7 @@ public class UpgradeStatus : MonoBehaviour
             {
                 int cost = getCost(idx);
                 bool isLock = false;
-                itemInfo.setItem(cost, isLock);
+                itemInfo.setItem(getSprite(idx), cost, isLock);
             }
         }
     }
@@ -69,5 +69,23 @@ public class UpgradeStatus : MonoBehaviour
                 break;
         }
         return (cost);
+    }
+
+    Sprite getSprite(int index)
+    {
+        Sprite sprite = null;
+        switch (ingredientType)
+        {
+            case IngredientType.Ice:
+                sprite = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData((Data.ICE)index).IngredientGameData.IngredientSprite;
+                break;
+            case IngredientType.Syrup:
+                sprite = IngredientGameDataHolder.Instance.IngredientGameDatas.GetSyrupGameData((Data.SYRUP)index).IngredientGameData.IngredientSprite;
+                break;
+            case IngredientType.Topping:
+                sprite = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData((Data.TOPPING)index).IngredientGameData.IngredientSprite;
+                break;
+        }
+        return (sprite);
     }
 }
