@@ -8,29 +8,37 @@ using UnityEngine.UI;
 public class PrologTypingText : MonoBehaviour
 {
     [Multiline] [SerializeField] private string typingText;
+    [SerializeField] private Text textUI;
 
-    [SerializeField]
-    private Text _text;
-
+    private Coroutine _coTypeText;
+    public bool FlipedText { get; private set; }
     private void Start()
     {
-        _text.text = "";
+        textUI.text = "";
+        FlipedText = false;
     }
 
     public void TypeText(string text)
     {
-        StartCoroutine(CoTypeText(text ?? typingText));
+        _coTypeText = StartCoroutine(CoTypeText(text ?? typingText));
     }
 
     IEnumerator CoTypeText(string text)
     {
         const float waitTime = 0.1f;
-        _text.text = "";
+        textUI.text = "";
         foreach (var t in text)
         {
-            _text.text += t;
+            textUI.text += t;
             yield return new WaitForSeconds(waitTime);
         }
+    }
+
+    public void FlipText()
+    {
+        StopCoroutine(_coTypeText);
+        textUI.text = typingText;
+        FlipedText = true;
     }
 
     public void MoveSceneByEnding()
