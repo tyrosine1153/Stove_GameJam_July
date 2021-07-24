@@ -292,6 +292,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5717713106108494484, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
+      propertyPath: crossFade
+      value: 
+      objectReference: {fileID: 606146092}
     - target: {fileID: 5717713106108494485, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -342,10 +346,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5717713106108494486, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
+--- !u!95 &606146092 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5717713105622769083, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
+  m_PrefabInstance: {fileID: 504879442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &678921376 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2089720029391499489, guid: 597c5276b74c3bd41946fc8fbbf6a8fc, type: 3}

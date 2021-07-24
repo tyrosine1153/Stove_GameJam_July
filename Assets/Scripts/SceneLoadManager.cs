@@ -14,11 +14,6 @@ public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
     private static readonly int StartTrigger = Animator.StringToHash("Start");
     private static readonly int EndTrigger = Animator.StringToHash("End");
 
-    private void Start()
-    {
-        crossFade = GetComponentInChildren<Animator>();
-    }
-
     public void LoadTitleScene()
     {
         StartCoroutine(LoadScene(0));
@@ -32,6 +27,7 @@ public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
 
     IEnumerator LoadScene(int sceneIndex)
     {
+        gameObject.SetActive(true);
         crossFade.SetTrigger(StartTrigger);
         
         yield return new WaitForSeconds(transitionTime);
