@@ -7,6 +7,7 @@ public class RecipeCtrl : MonoBehaviour
     public List<GameObject> recipes;
     public GameObject LBtn;
     public GameObject RBtn;
+    public GameObject options;
     int nowIndex = 0;
 
     // Start is called before the first frame update
@@ -30,11 +31,13 @@ public class RecipeCtrl : MonoBehaviour
     public void openRecipe()
     {
         this.gameObject.SetActive(true);
+        options.SetActive(false);
     }
 
     public void closeRecipe()
     {
         this.gameObject.SetActive(false);
+        options.SetActive(true);
     }
 
     public void clickLeftBtn()
