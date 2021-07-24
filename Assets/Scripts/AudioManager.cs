@@ -2,20 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SfxType
+{
+    Click,
+    Select,
+    Cancel,
+    Success,
+    SuccessHigh,
+    Fail,
+    Unlock,
+    Bell,
+    Page,
+}
+
 public class AudioManager : PersistentSingleton<AudioManager>
 {
     [SerializeField] 
     private AudioClip[] _audioClips;
-    
+
+    [SerializeField]
     private AudioSource _audioSource;
+
+    [SerializeField]
+    private AudioClip[] _sfxClips;
+
+    [SerializeField]
+    private AudioSource _sfxSource;
+
+    [SerializeField]
     private Animator _animator;
     private static readonly int In = Animator.StringToHash("FadeIn");
     private static readonly int Out = Animator.StringToHash("FadeOut");
 
-    private void Start()
+    public void PlaySfx(SfxType sfxType)
     {
-        _audioSource = GetComponent<AudioSource>();
-        _animator = GetComponent<Animator>();
+        int index = (int)sfxType;
+        if (index < _sfxClips.Length)
+        {
+            _sfxSource.PlayOneShot(_sfxClips[index]);
+        }
     }
 
     public void FadeIn(int clipNumber)

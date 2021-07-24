@@ -91,6 +91,8 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         instance = this;
 
+        AudioManager.Instance.FadeIn(1);
+
         highScore = PlayerPrefs.GetInt(HIGHSCORE_SAVE_KEY, 0);
 
         var ingredientData = IngredientGameDataHolder.Instance.IngredientGameDatas;
@@ -184,6 +186,8 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void OpenStore()
     {
+        AudioManager.Instance.PlaySfx(SfxType.Click);
+
         dailyBingsuPrice = 0;
         dailyPearlCount = 0;
         dailyRubyCount = 0;
@@ -243,6 +247,7 @@ public class StageManager : MonoBehaviour, IStageManager
         {
             yield return waitForSeconds;    //손님 오기까지 대기 시간
             //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경
+            AudioManager.Instance.PlaySfx(SfxType.Bell);
             mermaid.Setting(day);
 
             //손님 들어옴, 타이머 시작
@@ -276,6 +281,7 @@ public class StageManager : MonoBehaviour, IStageManager
         // 얼음이 선택되어 있지 않다면, 이 얼음 종류를 선택한다.
         if (selectedBingsu.Ice == Data.ICE.NONE)
         {
+            AudioManager.Instance.PlaySfx(SfxType.Select);
             selectedBingsu.Ice = iceType;
             inGameUI.SetResultBingsu(selectedBingsu);
         }
@@ -297,12 +303,14 @@ public class StageManager : MonoBehaviour, IStageManager
         // 시럽잇 선택되어 있지 않다면, 이 시럽 종류를 선택한다.
         if (selectedBingsu.Syrup == Data.SYRUP.NONE)
         {
+            AudioManager.Instance.PlaySfx(SfxType.Select);
             selectedBingsu.Syrup = syrupType;
             inGameUI.SetResultBingsu(selectedBingsu);
         }
         // 시럽을 더 선택할 수 있다면 (섞을 수 았다면), 섞은 시럽을 선택한다.
         else if (SyrupColorMix.TryGetMixedSyrup(selectedBingsu.Syrup, syrupType, out var resultSyrup))
         {
+            AudioManager.Instance.PlaySfx(SfxType.Select);
             selectedBingsu.Syrup = resultSyrup;
             inGameUI.SetResultBingsu(selectedBingsu);
         }
@@ -324,6 +332,7 @@ public class StageManager : MonoBehaviour, IStageManager
         // 토핑이 선택되어 있지 않다면, 이 토핑 종류를 선택한다.
         if (selectedBingsu.Topping == Data.TOPPING.NONE)
         {
+            AudioManager.Instance.PlaySfx(SfxType.Select);
             selectedBingsu.Topping = toppingType;
             inGameUI.SetResultBingsu(selectedBingsu);
         }
@@ -347,6 +356,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
         var result = ingredientUnlockData.UnlockIce(iceType);
         inGameUI.UpdateSelectIngredientUI();
+        AudioManager.Instance.PlaySfx(SfxType.Unlock);
         return result;
     }
 
@@ -368,6 +378,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
         var result = ingredientUnlockData.UnlockTopping(toppingType);
         inGameUI.UpdateSelectIngredientUI();
+        AudioManager.Instance.PlaySfx(SfxType.Unlock);
         return result;
     }
 
@@ -396,6 +407,7 @@ public class StageManager : MonoBehaviour, IStageManager
             return;
         }
 
+        AudioManager.Instance.PlaySfx(SfxType.Success);
         mermaid.isOrderSatisfied[satisfiedBingsuIndex] = true;
         inGameUI.SetOrderUI(mermaid.GetNotSatisfiedBingsus());
         ResetBingsu();
@@ -463,6 +475,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void OrderFailed()
     {
+        AudioManager.Instance.PlaySfx(SfxType.Fail);
         ResetBingsu();
         inGameUI.SetOrderUIEnable(false);
         inGameUI.SetServeButtonAInteractive(false);
@@ -484,6 +497,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void OpenDailyResultUIPopup()
     {
+        AudioManager.Instance.PlaySfx(SfxType.SuccessHigh);
         var jewelGold = CalculateGold(0, dailyPearlCount, dailyRubyCount, dailyDiamondCount);
 
         var dailyResult = new DailyResult()

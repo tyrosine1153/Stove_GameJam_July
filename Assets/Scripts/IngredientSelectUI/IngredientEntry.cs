@@ -80,6 +80,8 @@ public class IngredientEntry : MonoBehaviour
 
     protected IEnumerator ShakeAnimation()
     {
+        AudioManager.Instance.PlaySfx(SfxType.Cancel);
+
         isShaking = true;
         int count = 3;
         Vector3 movement = new Vector3(5, 0, 0);
