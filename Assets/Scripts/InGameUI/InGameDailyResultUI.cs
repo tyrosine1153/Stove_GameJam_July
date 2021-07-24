@@ -58,7 +58,7 @@ public class InGameDailyResultUI : MonoBehaviour
 
     public void SetResult(DailyResult dailyResult)
     {
-        _titleText.text = $"{dailyResult.day}일차 결과";
+        _titleText.text = $"{dailyResult.day + 1}일차 결과";
 
         _pearlCountText.text = $"x {dailyResult.pearlCount}";
         _rubyCountText.text = $"x {dailyResult.rubyCount}";
