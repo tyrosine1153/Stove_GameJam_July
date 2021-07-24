@@ -16,9 +16,9 @@ public class Mermaid : MonoBehaviour
     private List<ExpressionSprites> mermaidSpriteList;
     private Image image;
 
-    public Data.ICE ice;
-    public Data.SYRUP syrup;
-    public Data.TOPPING topping;
+    public Data.ICE[] ice = new Data.ICE[2];
+    public Data.SYRUP[] syrup = new Data.SYRUP[2];
+    public Data.TOPPING[] topping = new Data.TOPPING[2];
 
     public int bingsuCount; //?? ??
 
@@ -30,6 +30,22 @@ public class Mermaid : MonoBehaviour
     {
         if (!gameObject.TryGetComponent(out image))
             Debug.LogError("Image ????? ?? ? ????");
+    }
+
+    public bool CompareBingsu(Data.ICE selectedIce, Data.SYRUP selectedSyrup, Data.TOPPING selectedTopping)
+    {
+        if(selectedIce == ice[0] && selectedSyrup == syrup[0] && selectedTopping == topping[0])
+        {
+            //UI update remove wanted bingsu
+            return true;
+        }
+        else if (selectedIce == ice[1] && selectedSyrup == syrup[1] && selectedTopping == topping[1])
+        {
+            //UI update remove wanted bingsu
+            return true;
+        }
+        else
+            return false;
     }
 
     // level? ?? ??? ??

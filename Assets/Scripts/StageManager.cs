@@ -44,6 +44,7 @@ public class StageManager : MonoBehaviour, IStageManager
     private int hp = 3;
     private float time = 0;
     private int gold = 0;
+    private int score = 0;
 
     private InGameState currentState = InGameState.Closed;
     public InGameState CurrentState
@@ -96,7 +97,8 @@ public class StageManager : MonoBehaviour, IStageManager
             if (time > 15)
             {
                 // ???? UI(???? ??) ??????
-                MermaidExit(false);
+                SubIce(false);
+                MermaidExit();
             }
         }
     }
@@ -181,6 +183,7 @@ public class StageManager : MonoBehaviour, IStageManager
         //Scene 변경
         //정산
         //각종 초기화 등
+        gold += score;
 
         currentState = InGameState.Closed;
 
@@ -190,7 +193,7 @@ public class StageManager : MonoBehaviour, IStageManager
         day++;
         inGameUI.SetDay(day);
 
-        if(day >= 30)
+        if (day >= 30)
         {
             //해피 엔딩
         }
@@ -331,56 +334,103 @@ public class StageManager : MonoBehaviour, IStageManager
         inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
     }
 
-    public void ServeBingsu()
+    //종 누르는 UI 연결하면 됩니다
+    void ServeBingsu()
     {
         if (currentState != InGameState.Playing)
         {
             return;
         }
 
-        for(int i = 0; i < mermaid.bingsuCount; i++)
-            if (selectedIce != mermaid.ice || selectedSyrup != mermaid.syrup || selectedTopping != mermaid.topping)
-            {
-                MermaidExit(false);
-                return;
-            }
+        if (mermaid.CompareBingsu(selectedIce, selectedSyrup, selectedTopping))
+        {
+            SubIce(false);
+            MermaidExit();
+            return;
+        }
+        SubIce(true);
+        if (mermaid.bingsuCount == 0)
+        {
+            MermaidExit();
+        }
 
-        MermaidExit(true);
-        ResetBingsu();
     }
 
     // 인어 퇴장 시
-    public void MermaidExit(bool isSueccess)
+    public void MermaidExit()
     {
         //인어 초기화
         mermaid.gameObject.SetActive(false);
-        if (isSueccess)
+        ResetBingsu();
+        IsGuest = false;
+    }
+
+
+    void SubIce(bool isSuccess)
+    {
+        if (isSuccess)
         {
+            mermaid.bingsuCount--;
+            switch (selectedIce)
+            {
+                case Data.ICE.SEAWATER:
+                    score += 200;
+                    break;
+                case Data.ICE.WHITE_MILK:
+                    score += 350;
+                    break;
+                case Data.ICE.MINTCHOCO_MILK:
+                    score += 750;
+                    break;
+                case Data.ICE.CHOCO_MILK:
+                    score += 1300;
+                    break;
+                case Data.ICE.STRAWBERRY_MILK:
+                    score += 2700;
+                    break;
+            }
+            switch (selectedTopping)
+            {
+                case Data.TOPPING.REDBEAN:
+                    score += 200;
+                    break;
+                case Data.TOPPING.FRUIT_COCK:
+                    score += 350;
+                    break;
+                case Data.TOPPING.LEMON:
+                    score += 750;
+                    break;
+                case Data.TOPPING.CHOCOLATE:
+                    score += 1300;
+                    break;
+                case Data.TOPPING.STRAWBERRY:
+                    score += 2700;
+                    break;
+            }
             if (time > 10)
             {
                 //진주
                 // 보석 증가, 표정
+                score += 100;
                 mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             }
             else if (time > 8)
             {
                 //루비
                 // 보석 증가, 표정
+                score += 250;
                 mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else
             {
                 //다이아
                 // 보석 증가, 표정
-
+                score += 500;
                 if (hp >= 3)
-                {
                     //점수 증가
-                }
+                    score += 550;
                 else
-                {
                     hp++;
-                }
                 mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
             }
         }
@@ -401,13 +451,6 @@ public class StageManager : MonoBehaviour, IStageManager
         selectedTopping = Data.TOPPING.NONE;
         inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
     }
-
-    void CalculReward()
-    {
-        //mermaid.bingsuCount
-        //selectedIce 종류에 따라 증가
-    }
-
     void End()
     {
         //엔딩 씬
