@@ -20,6 +20,8 @@ public class PrologUIControl2 : MonoBehaviour
         {
             prologPages[i].SetActive(false);
         }
+        var a = prologPages[_pageCount].GetComponentInChildren<PrologTypingText>();
+        if (a != null) a.TypeText(null);
     }
 
     public void FlipPage()
