@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // StageManager 기능이 구현되면, 이 코드를 그쪽에 옮겨간다.
-public class TempStageManager : MonoSingleton<TempStageManager>
+public class TempStageManager : MonoSingleton<TempStageManager>, IStageManager
 {
+    public InGameState CurrentState => InGameState.Playing;
+
     [SerializeField]
     private ResultBingsuUI _resultUI;
+
+    private IngredientUnlockData ingredientUnlockData;
+    public IngredientUnlockData IngredientUnlockData => ingredientUnlockData;
 
     private Data.ICE _selectedIce;
     private Data.SYRUP _selectedSyrup;
@@ -14,6 +19,13 @@ public class TempStageManager : MonoSingleton<TempStageManager>
 
     private void Awake()
     {
+        var ingredientData = IngredientGameDataHolder.Instance.IngredientGameDatas;
+        ingredientUnlockData = new IngredientUnlockData(
+                ingredientData.GetAllFreeIces(),
+                ingredientData.GetAllFreeSyrups(),
+                ingredientData.GetAllFreeToppings()
+            );
+
         ResetIngredientsForTest();
     }
 
@@ -23,7 +35,7 @@ public class TempStageManager : MonoSingleton<TempStageManager>
         if (_selectedIce == Data.ICE.NONE)
         {
             _selectedIce = iceType;
-            UpdateResultUI();
+            UpdateResultBingsuUI();
         }
     }
 
@@ -39,13 +51,13 @@ public class TempStageManager : MonoSingleton<TempStageManager>
         if (_selectedSyrup == Data.SYRUP.NONE)
         {
             _selectedSyrup = syrupType;
-            UpdateResultUI();
+            UpdateResultBingsuUI();
         }
         // 시럽을 더 선택할 수 있다면 (섞을 수 았다면), 섞은 시럽을 선택한다.
         else if (SyrupColorMix.TryGetMixedSyrup(_selectedSyrup, syrupType, out var resultSyrup))
         {
             _selectedSyrup = resultSyrup;
-            UpdateResultUI();
+            UpdateResultBingsuUI();
         }
     }
 
@@ -61,7 +73,7 @@ public class TempStageManager : MonoSingleton<TempStageManager>
         if (_selectedTopping == Data.TOPPING.NONE)
         {
             _selectedTopping = toppingType;
-            UpdateResultUI();
+            UpdateResultBingsuUI();
         }
     }
 
@@ -72,11 +84,21 @@ public class TempStageManager : MonoSingleton<TempStageManager>
         _selectedSyrup = Data.SYRUP.NONE;
         _selectedTopping = Data.TOPPING.NONE;
 
-        UpdateResultUI();
+        UpdateResultBingsuUI();
     }
 
-    private void UpdateResultUI()
+    public void UpdateResultBingsuUI()
     {
         _resultUI.SetResult(_selectedIce, _selectedSyrup, _selectedTopping);
+    }
+
+    public bool BuyIce(Data.ICE iceType)
+    {
+        return false;
+    }
+
+    public bool BuyTopping(Data.TOPPING toppingType)
+    {
+        return false;
     }
 }

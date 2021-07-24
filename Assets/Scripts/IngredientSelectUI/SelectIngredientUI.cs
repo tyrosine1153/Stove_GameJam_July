@@ -16,12 +16,12 @@ public class SelectIngredientUI : MonoBehaviour
 
     private List<IngredientEntry> _ingredientEntries = new List<IngredientEntry>();
 
-    public void SetIngredientEntries(List<IngredientGameData> ingredientDatas, SelectIngredientTypeUI ingredientTypeUI)
+    public void SetIngredientEntries(List<IngredientGameData> ingredientDatas, List<bool> unlockedDatas, InGameState gameState, SelectIngredientTypeUI ingredientTypeUI)
     {
         SetIngredientEntryCount(ingredientDatas.Count);
         for (int i = 0; i < ingredientDatas.Count; i++)
         {
-            _ingredientEntries[i].ApplyData(ingredientDatas[i], _ingredientType, i, ingredientTypeUI);
+            _ingredientEntries[i].ApplyData(ingredientDatas[i], unlockedDatas[i], gameState, _ingredientType, i, ingredientTypeUI);
         }
     }
 

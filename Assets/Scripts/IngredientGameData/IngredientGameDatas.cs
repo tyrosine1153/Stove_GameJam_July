@@ -128,4 +128,28 @@ public class IngredientGameDatas : ScriptableObject
     {
         return _toppingDatas.Select(data => data.Value.IngredientGameData).ToList();
     }
+
+    public List<Data.ICE> GetAllFreeIces()
+    {
+        return _iceDatas
+            .Where(data => data.Value.IngredientGameData.UnlockCost == 0)
+            .Select(data => data.Key)
+            .ToList();
+    }
+
+    public List<Data.SYRUP> GetAllFreeSyrups()
+    {
+        return _syrupDatas
+            .Where(data => data.Value.IngredientGameData.UnlockCost == 0)
+            .Select(data => data.Key)
+            .ToList();
+    }
+
+    public List<Data.TOPPING> GetAllFreeToppings()
+    {
+        return _toppingDatas
+            .Where(data => data.Value.IngredientGameData.UnlockCost == 0)
+            .Select(data => data.Key)
+            .ToList();
+    }
 }
