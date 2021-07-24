@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoadManager : MonoBehaviour
+public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
 {
     public Animator crossFade;
     public float transitionTime = 1f;
     
-    private static readonly int Start1 = Animator.StringToHash("Start");
+    private static readonly int StartTrigger = Animator.StringToHash("Start");
+    private static readonly int EndTrigger = Animator.StringToHash("End");
 
     private void Start()
     {
@@ -23,10 +24,12 @@ public class SceneLoadManager : MonoBehaviour
 
     IEnumerator LoadScene(int sceneIndex)
     {
-        crossFade.SetTrigger(Start1);
+        crossFade.SetTrigger(StartTrigger);
         
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(sceneIndex);
+        
+        crossFade.SetTrigger(EndTrigger);
     }
 }
