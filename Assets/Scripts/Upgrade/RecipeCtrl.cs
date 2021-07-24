@@ -22,22 +22,16 @@ public class RecipeCtrl : MonoBehaviour
         RBtn.SetActive(true);
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
-
     public void openRecipe()
     {
         this.gameObject.SetActive(true);
-        options.SetActive(false);
+        options?.SetActive(false);
     }
 
     public void closeRecipe()
     {
         this.gameObject.SetActive(false);
-        options.SetActive(true);
+        options?.SetActive(true);
     }
 
     public void clickLeftBtn()
