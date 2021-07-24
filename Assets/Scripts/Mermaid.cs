@@ -49,12 +49,6 @@ public class Mermaid : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < 2; i++)
-            {
-                Debug.Log(ice[i]);
-                Debug.Log(syrup[i]);
-                Debug.Log(topping[i]);
-            }
             Debug.Log("실패");
             return false;
         }
@@ -103,7 +97,6 @@ public class Mermaid : MonoBehaviour
             Debug.Log(syrup[i]);
             Debug.Log(topping[i]);
         }
-
     }
 
     public void SetExpression(EXPRESSION expression)

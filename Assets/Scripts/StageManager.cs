@@ -85,7 +85,7 @@ public class StageManager : MonoBehaviour, IStageManager
             {
                 mermaid.SetExpression(Mermaid.EXPRESSION.DISAPPOINTED);
             }
-            if (time > 15)
+            else if (time > 15)
             {
                 // ???? UI(???? ??) ??????
                 mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
@@ -422,7 +422,6 @@ public class StageManager : MonoBehaviour, IStageManager
             if (hp == 0)
                 End();
         }
-        IsGuest = false;
     }
 
     private void UpdateGold(int money)
