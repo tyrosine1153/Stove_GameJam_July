@@ -325,9 +325,14 @@ public class StageManager : MonoBehaviour, IStageManager
             return;
         }
         SubIce(true);
+        Debug.Log(mermaid.bingsuCount);
         if (mermaid.bingsuCount == 0)
         {
             MermaidExit();
+        }
+        else
+        {
+            ResetBingsu();
         }
 
     }
@@ -345,6 +350,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         if (isSuccess)
         {
+            ResetBingsu();
             int price = 0;
             mermaid.bingsuCount--;
             switch (selectedIce)
