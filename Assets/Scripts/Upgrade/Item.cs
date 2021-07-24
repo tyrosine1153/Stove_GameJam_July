@@ -40,15 +40,9 @@ public class Item : MonoBehaviour
 
     public void buyItem()
     {
-        if (isLock)
-        {
-            if (!isShaking)
-                StartCoroutine(Shake());
-        }
-        else
-        {
-            // ±¸¸Å
-        }
+        if (!isShaking)
+            StartCoroutine(Shake());
+
     }
 
     protected IEnumerator Shake()

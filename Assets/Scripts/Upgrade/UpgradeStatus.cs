@@ -25,7 +25,7 @@ public class UpgradeStatus : MonoBehaviour
     {
         int enumCount = getEnumCount();
 
-        for (int idx = 1; idx < enumCount; idx++)
+        for (int idx = enumCount - 1; idx > 0; idx--)
         {
             var newObj = Instantiate(prefab, item.transform);
             Item itemInfo = newObj.GetComponent<Item>();
