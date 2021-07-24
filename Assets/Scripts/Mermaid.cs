@@ -80,6 +80,19 @@ public class Mermaid : MonoBehaviour
         return bingsus;
     }
 
+    public List<Bingsu> GetNotSatisfiedBingsus()
+    {
+        List<Bingsu> bingsus = new List<Bingsu>();
+        for (int i = 0; i < orderedBingsuCount; i++)
+        {
+            if (!isOrderSatisfied[i])
+            {
+                bingsus.Add(orderedBingsus[i]);
+            }
+        }
+        return bingsus;
+    }
+
     private void ResetBingsu()
     {
         for (int i = 0; i < 2; i++)

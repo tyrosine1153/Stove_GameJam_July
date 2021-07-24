@@ -222,6 +222,8 @@ public class StageManager : MonoBehaviour, IStageManager
             //손님 들어옴, 타이머 시작
             IsGuest = true;
 
+            inGameUI.SetOrderUI(mermaid.GetNotSatisfiedBingsus());
+
             time = 0;
 
             //UI(쌓인 빙수 등) 초기화
@@ -367,6 +369,7 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         mermaid.isOrderSatisfied[satisfiedBingsuIndex] = true;
+        inGameUI.SetOrderUI(mermaid.GetNotSatisfiedBingsus());
         ResetBingsu();
 
         if (mermaid.IsAllOrderSatisfied)
@@ -434,6 +437,7 @@ public class StageManager : MonoBehaviour, IStageManager
     private void OrderFailed()
     {
         ResetBingsu();
+        inGameUI.SetOrderUIEnable(false);
         DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), OrderResult.Fail);
         mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
         --Hp;
@@ -443,6 +447,7 @@ public class StageManager : MonoBehaviour, IStageManager
     private void OrderSucceessed()
     {
         ResetBingsu();
+        inGameUI.SetOrderUIEnable(false);
         DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), expectedResult);
         MermaidExit();
     }

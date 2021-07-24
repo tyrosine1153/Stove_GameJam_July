@@ -27,6 +27,9 @@ public class InGameUI : MonoBehaviour
     private ResultBingsuUI _resultBingsuUI;
 
     [SerializeField]
+    private InGameOrderUI _orderUI;
+
+    [SerializeField]
     private GameObject _openButton;
 
     public void SetScore(int score)
@@ -53,9 +56,28 @@ public class InGameUI : MonoBehaviour
 
     public void SetState(InGameState state)
     {
+        SetOrderUIEnable(false);
         _goldObject.gameObject.SetActive(state == InGameState.Closed);
         _openButton.gameObject.SetActive(state == InGameState.Closed);
         _resultBingsuUI.gameObject.SetActive(state == InGameState.Playing);
+    }
+
+    public void SetOrderUI(List<Bingsu> bingsus)
+    {
+        if (bingsus.Count > 0)
+        {
+            SetOrderUIEnable(true);
+            _orderUI.SetBingsus(bingsus);
+        }
+        else
+        {
+            SetOrderUIEnable(false);
+        }
+    }
+
+    public void SetOrderUIEnable(bool flag)
+    {
+        _orderUI.gameObject.SetActive(flag);
     }
 
     public void SetResultBingsu(Bingsu bingsu)
