@@ -75,11 +75,12 @@ public class StageManager : MonoBehaviour, IStageManager
                 ingredientData.GetAllFreeToppings()
             );
 
+        ResetBingsu();
+
         inGameUI.SetGold(gold);
         inGameUI.SetDay(day);
         UpdateUIState();
         UpdateIngredientUI();
-        UpdateResultBingsuUI();
     }
 
     void Start()
@@ -173,7 +174,8 @@ public class StageManager : MonoBehaviour, IStageManager
         currentState = InGameState.Playing;
         UpdateUIState();
         UpdateIngredientUI();
-        UpdateResultBingsuUI();
+
+        ResetBingsu();
 
         // UI창에서는 Day + 1로 계산
         StartCoroutine("guestCome");
@@ -188,7 +190,8 @@ public class StageManager : MonoBehaviour, IStageManager
         currentState = InGameState.Closed;
         UpdateUIState();
         UpdateIngredientUI();
-        UpdateResultBingsuUI();
+
+        ResetBingsu();
 
         day++;
         inGameUI.SetDay(day);
@@ -227,6 +230,11 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void SelectIce(Data.ICE iceType)
     {
+        if (currentState != InGameState.Playing)
+        {
+            return;
+        }
+
         // 얼음이 선택되어 있지 않다면, 이 얼음 종류를 선택한다.
         if (selectedIce == Data.ICE.NONE)
         {
@@ -237,6 +245,11 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void SelectSyrup(Data.SYRUP syrupType)
     {
+        if (currentState != InGameState.Playing)
+        {
+            return;
+        }
+
         // 얼음이 선택되어 있지 않다면, 선택할 수 없다.
         if (selectedIce == Data.ICE.NONE)
         {
@@ -259,6 +272,11 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void SelectTopping(Data.TOPPING toppingType)
     {
+        if (currentState != InGameState.Playing)
+        {
+            return;
+        }
+
         // 얼음이 선택되어 있지 않다면, 선택할 수 없다.
         if (selectedIce == Data.ICE.NONE)
         {
@@ -324,17 +342,22 @@ public class StageManager : MonoBehaviour, IStageManager
         inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
     }
 
-    //종 누르는 UI 연결하면 됩니다
-    void ringBell()
+    public void ServeBingsu()
     {
+        if (currentState != InGameState.Playing)
+        {
+            return;
+        }
+
         for(int i = 0; i < mermaid.bingsuCount; i++)
             if (selectedIce != mermaid.ice || selectedSyrup != mermaid.syrup || selectedTopping != mermaid.topping)
             {
                 MermaidExit(false);
                 return;
             }
-        MermaidExit(true);
 
+        MermaidExit(true);
+        ResetBingsu();
     }
 
     // 인어 퇴장 시
@@ -380,6 +403,14 @@ public class StageManager : MonoBehaviour, IStageManager
                 End();
         }
         IsGuest = false;
+    }
+
+    private void ResetBingsu()
+    {
+        selectedIce = Data.ICE.NONE;
+        selectedSyrup = Data.SYRUP.NONE;
+        selectedTopping = Data.TOPPING.NONE;
+        UpdateResultBingsuUI();
     }
 
     void CalculReward()

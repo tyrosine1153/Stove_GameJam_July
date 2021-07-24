@@ -48,7 +48,7 @@ public class IngredientEntry : MonoBehaviour
             case InGameState.Closed:
                 _buyUIObject.SetActive(!isUnlocked);
                 _lockUIObject.SetActive(false);
-                _unlockCostText.text = ingredientData.UnlockCost.ToString();
+                _unlockCostText.text = $"{ingredientData.UnlockCost}G";
                 break;
         }
     }

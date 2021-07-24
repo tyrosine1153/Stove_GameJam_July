@@ -98,6 +98,18 @@ MonoBehaviour:
       ResultSprite: {fileID: 21300000, guid: 06f8cd66435bc4225a9104392438eb95, type: 3}
       IngredientSprite: {fileID: 0}
       UnlockCost: 0
+  - SyrupType: 9
+    IngredientGameData:
+      DisplayName: "\uCD08\uB85D"
+      ResultSprite: {fileID: 21300000, guid: 06e78ecd3ea644af1a33351b71b8eac8, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
+  - SyrupType: 10
+    IngredientGameData:
+      DisplayName: "\uB808\uBAAC"
+      ResultSprite: {fileID: 21300000, guid: 34c99ae0c40f34d71b23be952dce19dd, type: 3}
+      IngredientSprite: {fileID: 0}
+      UnlockCost: 0
   ToppingDatas:
   - ToppingType: 6
     IngredientGameData:
