@@ -11,20 +11,20 @@ public class ExpressionSprites
 
 public class Mermaid : MonoBehaviour
 {
-    [Header("인어마다 각각의 표정을 일반(무), 웃는, 화난 순서대로 Sprite를 넣으세요")]
+    [Header("인어마다 각각의 표정을 HAPPY(Idle), impassive, disappointed, angry 순서대로 Sprite를 넣으세요")]
     [SerializeField]
     private List<ExpressionSprites> mermaidSpriteList;
-    private Image image;
+    public Image image;
 
     public Data.ICE[] ice;
     public Data.SYRUP[] syrup;
     public Data.TOPPING[] topping;
 
-    public int bingsuCount; //?? ??
+    public int bingsuCount; //빙수 개수
 
     private int mermaidIndex;
 
-    public enum EXPRESSION { IDLE, HAPPY, ANGRY }
+    public enum EXPRESSION { HAPPY, IMPASSIVE, DISAPPOINTED, ANGRY }
 
     void Start()
     {
@@ -49,14 +49,30 @@ public class Mermaid : MonoBehaviour
         }
         else
         {
+            for (int i = 0; i < 2; i++)
+            {
+                Debug.Log(ice[i]);
+                Debug.Log(syrup[i]);
+                Debug.Log(topping[i]);
+            }
             Debug.Log("실패");
             return false;
         }
     }
-
+    private void ResetBingsu()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            ice[i] = Data.ICE.NONE;
+            syrup[i] = Data.SYRUP.NONE;
+            topping[i] = Data.TOPPING.NONE;
+        }
+    }
     // level에 따라 난이도 증가
     public void Setting(int day)
     {
+        ResetBingsu();
+        image.enabled = true;
         // 빙수 개수
         int day_index = 0;
         for (int i = 0; i < StageManager.instance.stage.Length; i++)
@@ -74,13 +90,18 @@ public class Mermaid : MonoBehaviour
             bingsuCount = 2;
 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        SetExpression(EXPRESSION.IDLE);
+        SetExpression(EXPRESSION.HAPPY);
 
 
         // 해금된 재료에 따라 ice, 시럽, topping 등 선택
         for(int i = 0; i < bingsuCount; i++)
         {
-            //StageManager.instance.IngredientUnlockData.GetRandomIce
+            ice[i] = StageManager.instance.IngredientUnlockData.GetRandomIce();
+            syrup[i] = StageManager.instance.IngredientUnlockData.GetRandomSyrup();
+            topping[i] = StageManager.instance.IngredientUnlockData.GetRandomTopping();
+            Debug.Log(ice[i]);
+            Debug.Log(syrup[i]);
+            Debug.Log(topping[i]);
         }
 
     }

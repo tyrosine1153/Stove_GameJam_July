@@ -94,9 +94,22 @@ public class StageManager : MonoBehaviour, IStageManager
         if (IsGuest)
         {
             time += Time.fixedDeltaTime;
+            if (time < 8)
+            {
+                mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
+            }
+            else if (time > 8)
+            {
+                mermaid.SetExpression(Mermaid.EXPRESSION.IMPASSIVE);
+            }
+            else if (time > 10)
+            {
+                mermaid.SetExpression(Mermaid.EXPRESSION.DISAPPOINTED);
+            }
             if (time > 15)
             {
                 // ???? UI(???? ??) ??????
+                mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
                 SubIce(false);
                 MermaidExit();
             }
@@ -203,10 +216,11 @@ public class StageManager : MonoBehaviour, IStageManager
     {
 
         WaitWhile waitWhile = new WaitWhile(() => IsGuest);
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(2);
         int index = 0;
         while (mermaidCount > index)    //Day ???? ????, json ?????? ????
         {
+            yield return waitForSeconds;    //손님 오기까지 대기 시간
             //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경 
             mermaid.Setting(day);
 
@@ -220,6 +234,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
             yield return waitWhile;
             yield return waitForSeconds;   //잠시 손님이 가기 직전에 대기
+            mermaid.image.enabled = false;
             index++;
         }
         CloseStore();
@@ -342,7 +357,7 @@ public class StageManager : MonoBehaviour, IStageManager
             return;
         }
 
-        if (mermaid.CompareBingsu(selectedIce, selectedSyrup, selectedTopping))
+        if (!mermaid.CompareBingsu(selectedIce, selectedSyrup, selectedTopping))
         {
             SubIce(false);
             MermaidExit();
@@ -360,7 +375,6 @@ public class StageManager : MonoBehaviour, IStageManager
     public void MermaidExit()
     {
         //인어 초기화
-        mermaid.gameObject.SetActive(false);
         ResetBingsu();
         IsGuest = false;
     }
@@ -370,56 +384,58 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         if (isSuccess)
         {
+            int price = 0;
             mermaid.bingsuCount--;
             switch (selectedIce)
             {
                 case Data.ICE.SEAWATER:
-                    score += 200;
+                    price += 200;
                     break;
                 case Data.ICE.WHITE_MILK:
-                    score += 350;
+                    price += 350;
                     break;
                 case Data.ICE.MINTCHOCO_MILK:
-                    score += 750;
+                    price += 750;
                     break;
                 case Data.ICE.CHOCO_MILK:
-                    score += 1300;
+                    price += 1300;
                     break;
                 case Data.ICE.STRAWBERRY_MILK:
-                    score += 2700;
+                    price += 2700;
                     break;
             }
             switch (selectedTopping)
             {
                 case Data.TOPPING.REDBEAN:
-                    score += 200;
+                    price += 200;
                     break;
                 case Data.TOPPING.FRUIT_COCK:
-                    score += 350;
+                    price += 350;
                     break;
                 case Data.TOPPING.LEMON:
-                    score += 750;
+                    price += 750;
                     break;
                 case Data.TOPPING.CHOCOLATE:
-                    score += 1300;
+                    price += 1300;
                     break;
                 case Data.TOPPING.STRAWBERRY:
-                    score += 2700;
+                    price += 2700;
                     break;
             }
+            score += price / 20;
             if (time > 10)
             {
                 //진주
                 // 보석 증가, 표정
                 score += 100;
-                mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
+                //mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             }
             else if (time > 8)
             {
                 //루비
                 // 보석 증가, 표정
                 score += 250;
-                mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
+                //mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else
             {
@@ -431,11 +447,12 @@ public class StageManager : MonoBehaviour, IStageManager
                     score += 550;
                 else
                     hp++;
-                mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
+                //mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
             }
         }
         else
         {
+            mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             hp--;
             //HP UI 업데이트
             if (hp == 0)
