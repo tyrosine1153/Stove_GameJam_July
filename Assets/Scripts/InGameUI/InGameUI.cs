@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class InGameUI : MonoBehaviour
 {
     [SerializeField]
-    private Text _highScore;
-
-    [SerializeField]
     private Text _dayText;
 
     [SerializeField]
@@ -16,6 +13,15 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     private GameObject _goldObject;
+
+    [SerializeField]
+    private Text _highScoreText;
+
+    [SerializeField]
+    private Text _scoreText;
+
+    [SerializeField]
+    private GameObject _scoreObject;
 
     [SerializeField]
     private InGameHPUI _hpUI;
@@ -30,6 +36,9 @@ public class InGameUI : MonoBehaviour
     private InGameOrderUI _orderUI;
 
     [SerializeField]
+    private InGameDailyResultUI _dailyResultUI;
+
+    [SerializeField]
     private GameObject _recipeButton;
 
     [SerializeField]
@@ -37,13 +46,6 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     private GameObject _openButton;
-
-    public void SetScore(int score)
-    {
-        if(int.Parse(_highScore.text) < score)
-            _highScore.text = score.ToString();
-
-    }
 
     public void SetDay(int day)
     {
@@ -60,6 +62,12 @@ public class InGameUI : MonoBehaviour
         _goldText.text = $"{gold}G";
     }
 
+    public void SetScore(int score, int highScore)
+    {
+        _scoreText.text = $"{score}점";
+        _highScoreText.text = $"{highScore}점";
+    }
+
     public void SetState(InGameState state)
     {
         SetOrderUIEnable(false);
@@ -69,6 +77,7 @@ public class InGameUI : MonoBehaviour
         _goldObject.SetActive(state == InGameState.Closed);
         _openButton.SetActive(state == InGameState.Closed);
         _resultBingsuUI.gameObject.SetActive(state == InGameState.Playing);
+        _scoreObject.SetActive(state == InGameState.Closed);
     }
 
     public void SetOrderUI(List<Bingsu> bingsus)
@@ -102,5 +111,11 @@ public class InGameUI : MonoBehaviour
     public void UpdateSelectIngredientUI()
     {
         _ingredientUI.UpdateUI();
+    }
+
+    public void OpenDailyUIPopup(DailyResult result)
+    {
+        _dailyResultUI.gameObject.SetActive(true);
+        _dailyResultUI.SetResult(result);
     }
 }

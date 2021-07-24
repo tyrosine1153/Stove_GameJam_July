@@ -36,9 +36,16 @@ public class StageManager : MonoBehaviour, IStageManager
     public int day = 0;    //0일차부터 29일차까지 30일
     private bool IsGuest = false;
     private float time = 0;
-    private int gold = 0;
+
+    private int currentGold = 0;
+    private int currentScore = 0;
+    private int highScore = 0;
+
     private int dailyScore = 0;
-    private int dailyGold = 0;
+    private int dailyBingsuPrice = 0;
+    private int dailyPearlCount = 0;
+    private int dailyRubyCount = 0;
+    private int dailyDiamondCount = 0;
 
     private int hp = 3;
     public int Hp
@@ -78,9 +85,13 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private Bingsu selectedBingsu = new Bingsu();
 
+    private static readonly string HIGHSCORE_SAVE_KEY = "HighScore";
+
     private void Awake()
     {
         instance = this;
+
+        highScore = PlayerPrefs.GetInt(HIGHSCORE_SAVE_KEY, 0);
 
         var ingredientData = IngredientGameDataHolder.Instance.IngredientGameDatas;
         ingredientUnlockData = new IngredientUnlockData(
@@ -173,7 +184,10 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public void OpenStore()
     {
-        dailyGold = 0;
+        dailyBingsuPrice = 0;
+        dailyPearlCount = 0;
+        dailyRubyCount = 0;
+        dailyDiamondCount = 0;
         dailyScore = 0;
         SetLevel();
 
@@ -191,7 +205,18 @@ public class StageManager : MonoBehaviour, IStageManager
         //Scene 변경
         //정산
         //각종 초기화 등
-        gold += dailyGold;
+        OpenDailyResultUIPopup();
+
+        var dailyGold = CalculateGold(dailyBingsuPrice, dailyPearlCount, dailyRubyCount, dailyDiamondCount);
+        currentGold += dailyGold;
+        currentScore += dailyScore;
+
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+            PlayerPrefs.SetInt(HIGHSCORE_SAVE_KEY, highScore);
+            PlayerPrefs.Save();
+        }
 
         currentState = InGameState.Closed;
 
@@ -309,13 +334,13 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         var cost = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData(iceType).IngredientGameData.UnlockCost;
-        if (gold < cost)
+        if (currentGold < cost)
         {
             return false;
         }
 
-        gold -= cost;
-        inGameUI.SetGold(gold);
+        currentGold -= cost;
+        inGameUI.SetGold(currentGold);
 
         var result = ingredientUnlockData.UnlockIce(iceType);
         inGameUI.UpdateSelectIngredientUI();
@@ -330,13 +355,13 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         var cost = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData(toppingType).IngredientGameData.UnlockCost;
-        if (gold < cost)
+        if (currentGold < cost)
         {
             return false;
         }
 
-        gold -= cost;
-        inGameUI.SetGold(gold);
+        currentGold -= cost;
+        inGameUI.SetGold(currentGold);
 
         var result = ingredientUnlockData.UnlockTopping(toppingType);
         inGameUI.UpdateSelectIngredientUI();
@@ -345,10 +370,10 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void UpdateInGameUI()
     {
-        //inGameUI.SetScore(dailyScore);
-        inGameUI.SetGold(gold);
+        inGameUI.SetGold(currentGold);
         inGameUI.SetDay(day);
         inGameUI.SetHp(hp);
+        inGameUI.SetScore(currentScore, highScore);
         inGameUI.SetState(currentState);
         inGameUI.UpdateSelectIngredientUI();
         inGameUI.SetResultBingsu(selectedBingsu);
@@ -360,7 +385,6 @@ public class StageManager : MonoBehaviour, IStageManager
         {
             return;
         }
-
 
         // 일치하는 빙수가 없다면, 실패한다.
         if (!mermaid.CompareBingsu(selectedBingsu, out var satisfiedBingsuIndex))
@@ -398,21 +422,20 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         // 추가 보상을 계산한다.
-        int jewelPrice = 0;
-        int score = 0;
+        int addedScore = totalBingsuPrice / 20;
         switch(result)
         {
             case OrderResult.Pearl:
-                jewelPrice = 20;
-                score = 100;
+                dailyPearlCount += 1;
+                addedScore += 100;
                 break;
             case OrderResult.Ruby:
-                jewelPrice = 50;
-                score = 250;
+                dailyRubyCount += 1;
+                addedScore += 250;
                 break;
             case OrderResult.Diamond:
-                jewelPrice = 100;
-                score = 500;
+                dailyDiamondCount += 1;
+                addedScore += 500;
                 break;
         }
 
@@ -421,7 +444,7 @@ public class StageManager : MonoBehaviour, IStageManager
         {
             if (Hp == MAX_HP)
             {
-                score += 550;
+                addedScore += 550;
             }
             else
             {
@@ -429,10 +452,10 @@ public class StageManager : MonoBehaviour, IStageManager
             }
         }
 
-        AddDailyGold(totalBingsuPrice + jewelPrice);
-        AddDailyScore(score);
+        dailyBingsuPrice += totalBingsuPrice;
+        dailyScore += addedScore;
 
-        Debug.Log($"결과: {result}, 획득 골드: {totalBingsuPrice + jewelPrice}, 획득 점수: {score}");
+        Debug.Log($"결과: {result}, 획득 점수: {addedScore}");
     }
 
     private void OrderFailed()
@@ -456,15 +479,34 @@ public class StageManager : MonoBehaviour, IStageManager
         MermaidExit();
     }
 
-    private void AddDailyGold(int money)
+    public void OpenDailyResultUIPopup()
     {
-        dailyGold += money;
+        var jewelGold = CalculateGold(0, dailyPearlCount, dailyRubyCount, dailyDiamondCount);
+
+        var dailyResult = new DailyResult()
+        {
+            day = day,
+
+            pearlCount = dailyPearlCount,
+            rubyCount = dailyRubyCount,
+            diamondCount = dailyDiamondCount,
+
+            prevGold = currentGold,
+            dailyBingsuGold = dailyBingsuPrice,
+            dailyJewelGold = jewelGold,
+            currentGold = currentGold + jewelGold + dailyBingsuPrice,
+
+            prevScore = currentScore,
+            dailyScore = dailyScore,
+            currentScore = currentScore + dailyScore
+        };
+
+        inGameUI.OpenDailyUIPopup(dailyResult);
     }
 
-    private void AddDailyScore(int score)
+    private static int CalculateGold(int dailyBingsuPrice, int pearlCount, int rubyCount, int diamondCount)
     {
-        dailyScore += score;
-        //UI Update
+        return dailyBingsuPrice + 20 * pearlCount + 50 * rubyCount + 100 * diamondCount;
     }
 
     private void ResetBingsu()
