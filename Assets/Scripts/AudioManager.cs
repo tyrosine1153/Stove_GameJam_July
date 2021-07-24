@@ -43,6 +43,12 @@ public class AudioManager : PersistentSingleton<AudioManager>
         }
     }
 
+    public void PlayBgm(int clipNumber)
+    {
+        _audioSource.clip = _audioClips[clipNumber];
+        _audioSource.Play();
+    }
+
     public void FadeIn(int clipNumber)
     {
         _audioSource.clip = _audioClips[clipNumber] ?? _audioClips[0];

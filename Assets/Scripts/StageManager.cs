@@ -91,7 +91,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         instance = this;
 
-        AudioManager.Instance.FadeIn(1);
+        AudioManager.Instance.PlayBgm(1);
 
         highScore = PlayerPrefs.GetInt(HIGHSCORE_SAVE_KEY, 0);
 

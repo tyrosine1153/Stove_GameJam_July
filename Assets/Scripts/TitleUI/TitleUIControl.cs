@@ -7,6 +7,5 @@ public class TitleUIControl : MonoBehaviour
     public void OnClickStartButton()
     {
         SceneLoadManager.Instance.MoveScene(SceneType.InGame);
-        AudioManager.Instance.FadeOut();
     }
 }
