@@ -33,7 +33,7 @@ public class InGameUI : MonoBehaviour
     private GameObject _recipeButton;
 
     [SerializeField]
-    private GameObject _serveButton;
+    private Button _serveButton;
 
     [SerializeField]
     private GameObject _openButton;
@@ -63,7 +63,8 @@ public class InGameUI : MonoBehaviour
     public void SetState(InGameState state)
     {
         SetOrderUIEnable(false);
-        _serveButton.SetActive(state == InGameState.Playing);
+        SetServeButtonAInteractive(false);
+        _serveButton.gameObject.SetActive(state == InGameState.Playing);
         _recipeButton.SetActive(state == InGameState.Closed);
         _goldObject.SetActive(state == InGameState.Closed);
         _openButton.SetActive(state == InGameState.Closed);
@@ -86,6 +87,11 @@ public class InGameUI : MonoBehaviour
     public void SetOrderUIEnable(bool flag)
     {
         _orderUI.gameObject.SetActive(flag);
+    }
+
+    public void SetServeButtonAInteractive(bool flag)
+    {
+        _serveButton.interactable = flag;
     }
 
     public void SetResultBingsu(Bingsu bingsu)

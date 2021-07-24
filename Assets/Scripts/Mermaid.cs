@@ -11,7 +11,7 @@ public class ExpressionSprites
 
 public class Mermaid : MonoBehaviour
 {
-    [Header("인어마다 각각의 표정을 HAPPY(Idle), impassive, disappointed, angry 순서대로 Sprite를 넣으세요")]
+    [Header("인어마다 각각의 표정을 idle, impassive, disappointed, angry, happy 순서대로 Sprite를 넣으세요")]
     [SerializeField]
     private List<ExpressionSprites> mermaidSpriteList;
     public Image image;
@@ -40,7 +40,7 @@ public class Mermaid : MonoBehaviour
 
     private int mermaidIndex;
 
-    public enum EXPRESSION { HAPPY, IMPASSIVE, DISAPPOINTED, ANGRY }
+    public enum EXPRESSION { IDLE, IMPASSIVE, DISAPPOINTED, ANGRY, HAPPY }
 
     void Start()
     {
@@ -123,7 +123,7 @@ public class Mermaid : MonoBehaviour
             orderedBingsuCount = 2;
 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        SetExpression(EXPRESSION.IMPASSIVE);
+        SetExpression(EXPRESSION.IDLE);
 
 
         // 해금된 재료에 따라 ice, 시럽, topping 등 선택

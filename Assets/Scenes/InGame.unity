@@ -1403,7 +1403,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1796,21 +1796,25 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 037913fbe45a1454986627437d15ae7c, type: 3}
     - {fileID: 21300000, guid: 797a7eee666654674a157472f8ce3598, type: 3}
     - {fileID: 21300000, guid: 4c612e617fdc1423b8737abfc81d7af3, type: 3}
+    - {fileID: 21300000, guid: 72c6d6cea02e547be9ba7f32a2e0b5bd, type: 3}
   - expression:
     - {fileID: 21300000, guid: 21e147c89b2654366828a9471e25cd0c, type: 3}
     - {fileID: 21300000, guid: 030e14cd026e4419ca3818cd6f6f7025, type: 3}
     - {fileID: 21300000, guid: 566ac9602e6564b398e53da5f546b4aa, type: 3}
     - {fileID: 21300000, guid: ce72bf6d344164ab6b94a5a9efeb3773, type: 3}
+    - {fileID: 21300000, guid: 23fd3c35d15cb4932b8dd42083dc8931, type: 3}
   - expression:
     - {fileID: 21300000, guid: 9e4e59e33e36f4ac3ab2bb69b85d36f7, type: 3}
     - {fileID: 21300000, guid: def2ec5ff4f0b42c48632652c22f6e15, type: 3}
     - {fileID: 21300000, guid: c30791e8dec124e0f9f5b088847dac1b, type: 3}
     - {fileID: 21300000, guid: 8ee6561e96b72421d83b1c45a48873e1, type: 3}
+    - {fileID: 21300000, guid: 864eaeb466c614595acac608862c65c9, type: 3}
   - expression:
     - {fileID: 21300000, guid: f7170feddc34348869b0cc8088491d0f, type: 3}
     - {fileID: 21300000, guid: 765f37eacdeec497ab7ce8e90e536427, type: 3}
     - {fileID: 21300000, guid: 071bd6cc74b754d2e855e018ca73a630, type: 3}
     - {fileID: 21300000, guid: 1919eb8d799894107aa8c921c0d85c68, type: 3}
+    - {fileID: 21300000, guid: 215454da8ae684718aaece6a00552221, type: 3}
   image: {fileID: 0}
   isOrderSatisfied: 0000
   orderedBingsuCount: 0
@@ -2592,7 +2596,7 @@ MonoBehaviour:
   _resultBingsuUI: {fileID: 1040450802}
   _orderUI: {fileID: 1400546524}
   _recipeButton: {fileID: 298622571}
-  _serveButton: {fileID: 940134548}
+  _serveButton: {fileID: 940134552}
   _openButton: {fileID: 912117652}
 --- !u!1 &2116154977
 GameObject:

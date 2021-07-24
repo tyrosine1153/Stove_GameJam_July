@@ -110,7 +110,7 @@ public class StageManager : MonoBehaviour, IStageManager
             if (time < 8)
             {
                 expectedResult = OrderResult.Diamond;
-                mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
+                mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else if (time < 10)
             {
@@ -223,6 +223,7 @@ public class StageManager : MonoBehaviour, IStageManager
             IsGuest = true;
 
             inGameUI.SetOrderUI(mermaid.GetNotSatisfiedBingsus());
+            inGameUI.SetServeButtonAInteractive(true);
 
             time = 0;
 
@@ -438,6 +439,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         ResetBingsu();
         inGameUI.SetOrderUIEnable(false);
+        inGameUI.SetServeButtonAInteractive(false);
         DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), OrderResult.Fail);
         mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
         --Hp;
@@ -448,7 +450,9 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         ResetBingsu();
         inGameUI.SetOrderUIEnable(false);
+        inGameUI.SetServeButtonAInteractive(false);
         DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), expectedResult);
+        mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
         MermaidExit();
     }
 
