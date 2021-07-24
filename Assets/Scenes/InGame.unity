@@ -1391,7 +1391,7 @@ MonoBehaviour:
   - expression:
     - {fileID: 21300000, guid: 21e147c89b2654366828a9471e25cd0c, type: 3}
     - {fileID: 21300000, guid: 030e14cd026e4419ca3818cd6f6f7025, type: 3}
-    - {fileID: 21300000, guid: 797a7eee666654674a157472f8ce3598, type: 3}
+    - {fileID: 21300000, guid: 566ac9602e6564b398e53da5f546b4aa, type: 3}
     - {fileID: 21300000, guid: ce72bf6d344164ab6b94a5a9efeb3773, type: 3}
   - expression:
     - {fileID: 21300000, guid: 9e4e59e33e36f4ac3ab2bb69b85d36f7, type: 3}
@@ -1404,10 +1404,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 071bd6cc74b754d2e855e018ca73a630, type: 3}
     - {fileID: 21300000, guid: 1919eb8d799894107aa8c921c0d85c68, type: 3}
   image: {fileID: 0}
-  ice: 
-  syrup: 
-  topping: 
-  bingsuCount: 0
+  isOrderSatisfied: 0000
+  orderedBingsuCount: 0
 --- !u!114 &1285339575
 MonoBehaviour:
   m_ObjectHideFlags: 0

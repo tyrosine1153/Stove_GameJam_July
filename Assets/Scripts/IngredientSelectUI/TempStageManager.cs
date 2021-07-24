@@ -89,7 +89,7 @@ public class TempStageManager : MonoSingleton<TempStageManager>, IStageManager
 
     public void UpdateResultBingsuUI()
     {
-        _resultUI.SetResult(_selectedIce, _selectedSyrup, _selectedTopping);
+        _resultUI.SetResult(new Bingsu(_selectedIce, _selectedSyrup, _selectedTopping));
     }
 
     public bool BuyIce(Data.ICE iceType)
