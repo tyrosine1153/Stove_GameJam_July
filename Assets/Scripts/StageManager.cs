@@ -74,6 +74,10 @@ public class StageManager : MonoBehaviour, IStageManager
                 ingredientData.GetAllFreeSyrups(),
                 ingredientData.GetAllFreeToppings()
             );
+
+        inGameUI.SetGold(gold);
+        inGameUI.SetDay(day);
+        UpdateUIState();
         UpdateIngredientUI();
         UpdateResultBingsuUI();
     }
@@ -167,6 +171,7 @@ public class StageManager : MonoBehaviour, IStageManager
         SetLevel();
 
         currentState = InGameState.Playing;
+        UpdateUIState();
         UpdateIngredientUI();
         UpdateResultBingsuUI();
 
@@ -181,10 +186,13 @@ public class StageManager : MonoBehaviour, IStageManager
         //각종 초기화 등
 
         currentState = InGameState.Closed;
+        UpdateUIState();
         UpdateIngredientUI();
         UpdateResultBingsuUI();
 
         day++;
+        inGameUI.SetDay(day);
+
         if(day >= 30)
         {
             //해피 엔딩
@@ -279,6 +287,7 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         gold -= cost;
+        inGameUI.SetGold(gold);
         return ingredientUnlockData.UnlockIce(iceType);
     }
 
@@ -296,7 +305,13 @@ public class StageManager : MonoBehaviour, IStageManager
         }
 
         gold -= cost;
+        inGameUI.SetGold(gold);
         return ingredientUnlockData.UnlockTopping(toppingType);
+    }
+
+    private void UpdateUIState()
+    {
+        inGameUI.SetState(currentState);
     }
 
     private void UpdateIngredientUI()
