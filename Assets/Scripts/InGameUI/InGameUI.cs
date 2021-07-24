@@ -24,6 +24,12 @@ public class InGameUI : MonoBehaviour
     private GameObject _scoreObject;
 
     [SerializeField]
+    private Text _guestText;
+
+    [SerializeField]
+    private GameObject _guestObject;
+
+    [SerializeField]
     private InGameHPUI _hpUI;
 
     [SerializeField]
@@ -68,12 +74,18 @@ public class InGameUI : MonoBehaviour
         _highScoreText.text = $"{highScore}점";
     }
 
+    public void SetGuest(int remainGuest, int maxGuest)
+    {
+        _guestText.text = $"{remainGuest} / {maxGuest}";
+    }
+
     public void SetState(InGameState state)
     {
         SetOrderUIEnable(false);
         SetServeButtonAInteractive(false);
         _serveButton.gameObject.SetActive(state == InGameState.Playing);
         _recipeButton.SetActive(state == InGameState.Closed);
+        _guestObject.SetActive(state == InGameState.Playing);
         _goldObject.SetActive(state == InGameState.Closed);
         _openButton.SetActive(state == InGameState.Closed);
         _resultBingsuUI.gameObject.SetActive(state == InGameState.Playing);

@@ -237,8 +237,9 @@ public class StageManager : MonoBehaviour, IStageManager
 
         WaitWhile waitWhile = new WaitWhile(() => IsGuest);
         WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
-        int index = 0;
-        while (mermaidCount > index)    //Day ???? ????, json ?????? ????
+        int guestIndex = 0;
+        inGameUI.SetGuest(mermaidCount - guestIndex, mermaidCount);
+        while (mermaidCount > guestIndex)    //Day ???? ????, json ?????? ????
         {
             yield return waitForSeconds;    //손님 오기까지 대기 시간
             //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경
@@ -256,9 +257,11 @@ public class StageManager : MonoBehaviour, IStageManager
             //선택한 아이템 초기화
 
             yield return waitWhile;
+            inGameUI.SetGuest(mermaidCount - guestIndex - 1, mermaidCount);
             yield return waitForSeconds;   //잠시 손님이 가기 직전에 대기
+
             mermaid.image.enabled = false;
-            index++;
+            guestIndex++;
         }
         CloseStore();
     }
