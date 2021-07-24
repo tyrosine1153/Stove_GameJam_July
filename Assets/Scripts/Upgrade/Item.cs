@@ -9,6 +9,9 @@ public class Item : MonoBehaviour
     public Image lockImg;
     public GameObject costBtn;
 
+    private bool isShaking = false;
+    private bool isLock = false;
+
     //// Start is called before the first frame update
     //void Start()
     //{
@@ -23,7 +26,8 @@ public class Item : MonoBehaviour
 
     public void setItem(int cost, bool isLock)
     {
-        lockImg.enabled = isLock;
+        this.isLock = isLock;
+        lockImg.enabled = this.isLock;
         if (cost == 0)
         {
             costBtn.SetActive(false);
@@ -32,5 +36,37 @@ public class Item : MonoBehaviour
         {
             costTxt.text = cost.ToString() + " ¿ø";
         }
+    }
+
+    public void buyItem()
+    {
+        if (isLock)
+        {
+            if (!isShaking)
+                StartCoroutine(Shake());
+        }
+        else
+        {
+            // ±¸¸Å
+        }
+    }
+
+    protected IEnumerator Shake()
+    {
+        isShaking = true;
+        int count = 3;
+        Vector3 movement = new Vector3(5, 0, 0);
+
+        while (count-- > 0)
+        {
+            this.transform.position += movement;
+            yield return new WaitForSeconds(0.1f);
+            this.transform.position -= movement;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        isShaking = false;
+
+
     }
 }
