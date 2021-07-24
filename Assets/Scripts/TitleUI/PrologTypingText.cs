@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class PrologTypingText : MonoBehaviour
 {
-    [Multiline]
-    public string typingText;
+    [Multiline][SerializeField]
+    private string typingText;
+    
     private Text _text;
 
     private void Start()

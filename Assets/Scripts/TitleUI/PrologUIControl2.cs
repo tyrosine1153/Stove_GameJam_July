@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PrologUIControl2 : MonoBehaviour
 {
-    public GameObject[] prologPages;
+    [SerializeField] 
+    private GameObject[] prologPages;
+    
     private int _pageCount;
 
     private void Start()
