@@ -11,5 +11,4 @@ public interface IStageManager
     void SelectTopping(Data.TOPPING toppingType);
     bool BuyIce(Data.ICE iceType);
     bool BuyTopping(Data.TOPPING toppingType);
-    void UpdateResultBingsuUI();
 }

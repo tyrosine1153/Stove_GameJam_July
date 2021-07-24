@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameHPUI : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> _hpObjects;
+    private List<Image> _hpImages;
+
+    [SerializeField]
+    private Sprite _enableSprite;
+
+    [SerializeField]
+    private Sprite _disableSprite;
 
     public void SetHp(int hp)
     {
         for (int i = 0; i < hp; i++)
         {
-            _hpObjects[i].gameObject.SetActive(true);
+            _hpImages[i].sprite = _enableSprite;
         }
 
-        for (int i = hp; i < _hpObjects.Count; i++)
+        for (int i = hp; i < _hpImages.Count; i++)
         {
-            _hpObjects[i].gameObject.SetActive(false);
+            _hpImages[i].sprite = _disableSprite;
         }
     }
 }

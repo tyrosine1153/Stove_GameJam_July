@@ -76,11 +76,7 @@ public class StageManager : MonoBehaviour, IStageManager
             );
 
         ResetBingsu();
-
-        inGameUI.SetGold(gold);
-        inGameUI.SetDay(day);
-        UpdateUIState();
-        UpdateIngredientUI();
+        UpdateInGameUI();
     }
 
     void Start()
@@ -172,10 +168,9 @@ public class StageManager : MonoBehaviour, IStageManager
         SetLevel();
 
         currentState = InGameState.Playing;
-        UpdateUIState();
-        UpdateIngredientUI();
 
         ResetBingsu();
+        UpdateInGameUI();
 
         // UI창에서는 Day + 1로 계산
         StartCoroutine("guestCome");
@@ -188,10 +183,9 @@ public class StageManager : MonoBehaviour, IStageManager
         //각종 초기화 등
 
         currentState = InGameState.Closed;
-        UpdateUIState();
-        UpdateIngredientUI();
 
         ResetBingsu();
+        UpdateInGameUI();
 
         day++;
         inGameUI.SetDay(day);
@@ -239,7 +233,7 @@ public class StageManager : MonoBehaviour, IStageManager
         if (selectedIce == Data.ICE.NONE)
         {
             selectedIce = iceType;
-            UpdateResultBingsuUI();
+            inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
         }
     }
 
@@ -260,13 +254,13 @@ public class StageManager : MonoBehaviour, IStageManager
         if (selectedSyrup == Data.SYRUP.NONE)
         {
             selectedSyrup = syrupType;
-            UpdateResultBingsuUI();
+            inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
         }
         // 시럽을 더 선택할 수 있다면 (섞을 수 았다면), 섞은 시럽을 선택한다.
         else if (SyrupColorMix.TryGetMixedSyrup(selectedSyrup, syrupType, out var resultSyrup))
         {
             selectedSyrup = resultSyrup;
-            UpdateResultBingsuUI();
+            inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
         }
     }
 
@@ -287,7 +281,7 @@ public class StageManager : MonoBehaviour, IStageManager
         if (selectedTopping == Data.TOPPING.NONE)
         {
             selectedTopping = toppingType;
-            UpdateResultBingsuUI();
+            inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
         }
     }
 
@@ -327,18 +321,13 @@ public class StageManager : MonoBehaviour, IStageManager
         return ingredientUnlockData.UnlockTopping(toppingType);
     }
 
-    private void UpdateUIState()
+    private void UpdateInGameUI()
     {
+        inGameUI.SetGold(gold);
+        inGameUI.SetDay(day);
+        inGameUI.SetHp(hp);
         inGameUI.SetState(currentState);
-    }
-
-    private void UpdateIngredientUI()
-    {
         inGameUI.UpdateSelectIngredientUI();
-    }
-
-    public void UpdateResultBingsuUI()
-    {
         inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
     }
 
@@ -410,7 +399,7 @@ public class StageManager : MonoBehaviour, IStageManager
         selectedIce = Data.ICE.NONE;
         selectedSyrup = Data.SYRUP.NONE;
         selectedTopping = Data.TOPPING.NONE;
-        UpdateResultBingsuUI();
+        inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
     }
 
     void CalculReward()
