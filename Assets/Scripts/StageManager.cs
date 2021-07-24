@@ -301,6 +301,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void UpdateInGameUI()
     {
+        inGameUI.SetScore(dailyScore);
         inGameUI.SetGold(gold);
         inGameUI.SetDay(day);
         inGameUI.SetHp(hp);
