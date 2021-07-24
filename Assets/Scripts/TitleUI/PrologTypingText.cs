@@ -33,8 +33,16 @@ public class PrologTypingText : MonoBehaviour
         }
     }
 
-    public void LoadTitleScene()
+    public void MoveSceneByEnding()
     {
-        SceneLoadManager.Instance.LoadTitleScene();
+        var isHappyEnd = EndingUIControl.IsHappyEnd;
+        if (isHappyEnd)
+        {
+            SceneLoadManager.Instance.MoveScene(SceneType.Title);
+        }
+        else
+        {
+            SceneLoadManager.Instance.MoveScene(SceneType.InGame);
+        }
     }
 }

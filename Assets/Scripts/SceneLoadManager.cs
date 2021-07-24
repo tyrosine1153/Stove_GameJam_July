@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum SceneType
+{
+    Title,
+    InGame,
+    Ending,
+}
+
 public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
 {
     [SerializeField]
@@ -14,25 +21,38 @@ public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
     private static readonly int StartTrigger = Animator.StringToHash("Start");
     private static readonly int EndTrigger = Animator.StringToHash("End");
 
-    public void LoadTitleScene()
-    {
-        StartCoroutine(LoadScene(0));
+    private static readonly string TITLE_SCENE_NAME = "PrologAndTitle";
+    private static readonly string INGAME_SCENE_NAME = "InGame";
+    private static readonly string ENDING_SCENE_NAME = "Ending";
 
-    }
-    
-    public void LoadNextScene()
+    public void MoveScene(SceneType sceneType)
     {
-        StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+        var sceneName = GetSceneName(sceneType);
+        StartCoroutine(LoadScene(sceneName));
     }
 
-    IEnumerator LoadScene(int sceneIndex)
+    private static string GetSceneName(SceneType sceneType)
+    {
+        switch(sceneType)
+        {
+            case SceneType.Title:
+                return TITLE_SCENE_NAME;
+            case SceneType.InGame:
+                return INGAME_SCENE_NAME;
+            case SceneType.Ending:
+                return ENDING_SCENE_NAME;
+        }
+        return string.Empty;
+    }
+
+    IEnumerator LoadScene(string sceneName)
     {
         gameObject.SetActive(true);
         crossFade.SetTrigger(StartTrigger);
         
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
         
         crossFade.SetTrigger(EndTrigger);
     }

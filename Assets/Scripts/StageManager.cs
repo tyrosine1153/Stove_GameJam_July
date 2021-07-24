@@ -59,7 +59,7 @@ public class StageManager : MonoBehaviour, IStageManager
             inGameUI.SetHp(hp);
             if (hp == 0)
             {
-                End();
+                MoveEndingScene(false);
             }
         }
     }
@@ -203,7 +203,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
         if (day >= 30)
         {
-            //해피 엔딩
+            MoveEndingScene(true);
         }
     }
 
@@ -473,8 +473,9 @@ public class StageManager : MonoBehaviour, IStageManager
         inGameUI.SetResultBingsu(selectedBingsu);
     }
 
-    void End()
+    private void MoveEndingScene(bool isHappyEnd)
     {
-        //엔딩 씬
+        EndingUIControl.IsHappyEnd = isHappyEnd;
+        SceneLoadManager.Instance.MoveScene(SceneType.Ending);
     }
 }
