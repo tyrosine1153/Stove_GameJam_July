@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+public enum InGameState
+{
+    Closed,
+    Playing,
+}
+
 [CustomEditor(typeof(StageManager))]
 public class DuckGenerateButton : Editor
 {
@@ -18,22 +24,34 @@ public class DuckGenerateButton : Editor
         }
     }
 }
-public class StageManager : MonoBehaviour
+
+public class StageManager : MonoBehaviour, IStageManager
 {
     public static StageManager instance;
 
-    [Header("ÀÎ¾î")]
+    [Header("????")]
     public Mermaid mermaid;
-    [Header("jsonÆÄÀÏ")]
+    [Header("json????")]
     public TextAsset jsonFile;
 
+    public InGameUI inGameUI;
     public Data.StageJson[] stage;
 
     private int mermaidCount;
-    public int day = 0;    //0ÀÏÂ÷ºÎÅÍ 29ÀÏÂ÷±îÁö 30ÀÏ
+    public int day = 0;    //0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 29ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 30ï¿½ï¿½
     private bool IsGuest = false;
     private int hp = 3;
     private float time = 0;
+    private int gold = 0;
+
+    private InGameState currentState = InGameState.Closed;
+    public InGameState CurrentState
+    {
+        get => currentState;
+    }
+
+    private IngredientUnlockData ingredientUnlockData;
+    public IngredientUnlockData IngredientUnlockData => ingredientUnlockData;
 
     public int one = 0;
     public int two = 0;
@@ -48,6 +66,15 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        var ingredientData = IngredientGameDataHolder.Instance.IngredientGameDatas;
+        ingredientUnlockData = new IngredientUnlockData(
+                ingredientData.GetAllFreeIces(),
+                ingredientData.GetAllFreeSyrups(),
+                ingredientData.GetAllFreeToppings()
+            );
+        UpdateIngredientUI();
+        UpdateResultBingsuUI();
     }
 
     void Start()
@@ -55,7 +82,8 @@ public class StageManager : MonoBehaviour
         if (jsonFile)
             stage = JsonUtility.FromJson<Data.Stage>("{\"stage\":" + jsonFile.text + "}").stage;
         else
-            Debug.LogError("JsonÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾ÊÀ½");
+            Debug.LogError("Json?????? ???????? ????");
+
     }
 
     private void FixedUpdate()
@@ -65,7 +93,7 @@ public class StageManager : MonoBehaviour
             time += Time.fixedDeltaTime;
             if (time > 15)
             {
-                // ¿­¸° UI(¼±ÅÃ Ã¢) ÃÊ±âÈ­
+                // ???? UI(???? ??) ??????
                 MermaidExit(false);
             }
         }
@@ -133,27 +161,32 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    //Open UI ¿¬°áÇÏ¸é µË´Ï´Ù
+    //Open UI ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ë´Ï´ï¿½
     public void OpenStore()
     {
         SetLevel();
 
-        //mermaidCount = stage[day].mermaidCount;
-        //mermaid.bingsuCount = stage[day].IceCount;
-        // UIÃ¢¿¡¼­´Â Day + 1·Î °è»ê
-        
-        
+        currentState = InGameState.Playing;
+        UpdateIngredientUI();
+        UpdateResultBingsuUI();
+
+        // UI???????? Day + 1?? ????
         StartCoroutine("guestCome");
     }
+
     void CloseStore()
     {
-        //Scene º¯°æ
-        //Á¤»ê
-        //°¢Á¾ ÃÊ±âÈ­ µî
+        currentState = InGameState.Closed;
+        UpdateIngredientUI();
+        UpdateResultBingsuUI();
+
+        //Scene ????
+        //????
+        //???? ?????? ??
         day++;
         if(day >= 30)
         {
-            //ÇØÇÇ ¿£µù
+            //???? ????
         }
     }
 
@@ -163,43 +196,119 @@ public class StageManager : MonoBehaviour
         WaitWhile waitWhile = new WaitWhile(() => IsGuest);
         WaitForSeconds waitForSeconds = new WaitForSeconds(1);
         int index = 0;
-        while (mermaidCount > index)    //Day Á¾·á Á¶°Ç, json ¼öÄ¡¿¡ µû¶ó
+        while (mermaidCount > index)    //Day ???? ????, json ?????? ????
         {
-            //¼Õ´Ô ÀÌ¹ÌÁö È°¼ºÈ­ ¹× ½ºÇÁ¶óÀÌÆ® (¼Õ´Ô Á¾·ù)º¯°æ, ºù¼ö °³¼ö, ¿øÇÏ´Â ºù¼ö º¯°æ 
+            //ï¿½Õ´ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½Õ´ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             mermaid.Setting(day);
 
-            //¼Õ´Ô µé¾î¿È, Å¸ÀÌ¸Ó ½ÃÀÛ
+            //ï¿½Õ´ï¿½ ï¿½ï¿½ï¿½ï¿½, Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             IsGuest = true;
+
             time = 0;
 
-            //UI(½×ÀÎ ºù¼ö µî) ÃÊ±âÈ­
-            //¼±ÅÃÇÑ ¾ÆÀÌÅÛ ÃÊ±âÈ­
+            //UI(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½) ï¿½Ê±ï¿½È­
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+
             yield return waitWhile;
-            yield return waitForSeconds;    //Àá½Ã ¼Õ´ÔÀÌ °¡±â Á÷Àü¿¡ ´ë±â
+            yield return waitForSeconds;    //???? ?????? ???? ?????? ????
             index++;
         }
         CloseStore();
     }
 
-    // ¾óÀ½ ¼±ÅÃ ½Ã UI ¿¬°á
-    void SelectIce()
+    public void SelectIce(Data.ICE iceType)
     {
-        //selectedIce = ???
+        // ??? ???? ?? ???, ? ?? ??? ????.
+        if (selectedIce == Data.ICE.NONE)
+        {
+            selectedIce = iceType;
+            UpdateResultBingsuUI();
+        }
     }
 
-    // ½Ã·´ ¼±ÅÃ ½Ã UI ¿¬°á
-    void SelectSyrup()
+    public void SelectSyrup(Data.SYRUP syrupType)
     {
-        //selectedSyrup = ???
+        // ??? ???? ?? ???, ??? ? ??.
+        if (selectedIce == Data.ICE.NONE)
+        {
+            return;
+        }
+
+        // ??? ???? ?? ???, ? ?? ??? ????.
+        if (selectedSyrup == Data.SYRUP.NONE)
+        {
+            selectedSyrup = syrupType;
+            UpdateResultBingsuUI();
+        }
+        // ??? ? ??? ? ??? (?? ? ???), ?? ??? ????.
+        else if (SyrupColorMix.TryGetMixedSyrup(selectedSyrup, syrupType, out var resultSyrup))
+        {
+            selectedSyrup = resultSyrup;
+            UpdateResultBingsuUI();
+        }
     }
 
-    // ÅäÇÎ ¼±ÅÃ ½Ã UI ¿¬°á
-    void SelectTopping()
+    public void SelectTopping(Data.TOPPING toppingType)
     {
-        //selectedTopping = ???
+        // ??? ???? ?? ???, ??? ? ??.
+        if (selectedIce == Data.ICE.NONE)
+        {
+            return;
+        }
+
+        // ??? ???? ?? ???, ? ?? ??? ????.
+        if (selectedTopping == Data.TOPPING.NONE)
+        {
+            selectedTopping = toppingType;
+            UpdateResultBingsuUI();
+        }
     }
 
-    //Á¾ ´©¸£´Â UI ¿¬°áÇÏ¸é µË´Ï´Ù
+    public bool BuyIce(Data.ICE iceType)
+    {
+        if (ingredientUnlockData.IsIceUnlocked(iceType))
+        {
+            return false;
+        }
+
+        var cost = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData(iceType).IngredientGameData.UnlockCost;
+        if (gold < cost)
+        {
+            return false;
+        }
+
+        gold -= cost;
+        return ingredientUnlockData.UnlockIce(iceType);
+    }
+
+    public bool BuyTopping(Data.TOPPING toppingType)
+    {
+        if (ingredientUnlockData.IsToppingUnlocked(toppingType))
+        {
+            return false;
+        }
+
+        var cost = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData(toppingType).IngredientGameData.UnlockCost;
+        if (gold < cost)
+        {
+            return false;
+        }
+
+        gold -= cost;
+        return ingredientUnlockData.UnlockTopping(toppingType);
+    }
+
+    private void UpdateIngredientUI()
+    {
+        inGameUI.UpdateSelectIngredientUI();
+    }
+
+    public void UpdateResultBingsuUI()
+    {
+        inGameUI.SetResultBingsu(selectedIce, selectedSyrup, selectedTopping);
+    }
+
+    //?? ?????? UI ???????? ??????
     void ringBell()
     {
         for(int i = 0; i < mermaid.bingsuCount; i++)
@@ -212,33 +321,33 @@ public class StageManager : MonoBehaviour
 
     }
 
-    // ÀÎ¾î ÅðÀå ½Ã
+    // ???? ???? ??
     public void MermaidExit(bool isSueccess)
     {
-        //ÀÎ¾î ÃÊ±âÈ­
+        //???? ??????
         mermaid.gameObject.SetActive(false);
         if (isSueccess)
         {
             if (time > 10)
             {
-                //ÁøÁÖ
-                // º¸¼® Áõ°¡, Ç¥Á¤
+                //????
+                // ???? ????, ????
                 mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             }
             else if (time > 8)
             {
-                //·çºñ
-                // º¸¼® Áõ°¡, Ç¥Á¤
+                //????
+                // ???? ????, ????
                 mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else
             {
-                //´ÙÀÌ¾Æ
-                // º¸¼® Áõ°¡, Ç¥Á¤
+                //??????
+                // ???? ????, ????
 
                 if (hp >= 3)
                 {
-                    //Á¡¼ö Áõ°¡
+                    //???? ????
                 }
                 else
                 {
@@ -250,7 +359,7 @@ public class StageManager : MonoBehaviour
         else
         {
             hp--;
-            //HP UI ¾÷µ¥ÀÌÆ®
+            //HP UI ????????
             if (hp == 0)
                 End();
         }
@@ -260,11 +369,11 @@ public class StageManager : MonoBehaviour
     void CalculReward()
     {
         //mermaid.bingsuCount
-        //selectedIce Á¾·ù¿¡ µû¶ó Áõ°¡
+        //selectedIce ?????? ???? ????
     }
 
     void End()
     {
-        //¿£µù ¾À
+        //???? ??
     }
 }
