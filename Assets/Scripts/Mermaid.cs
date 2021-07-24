@@ -11,7 +11,7 @@ public class ExpressionSprites
 
 public class Mermaid : MonoBehaviour
 {
-    [Header("???? ??? ??? ??(?), ??, ?? ???? Sprite? ????")]
+    [Header("인어마다 각각의 표정을 일반(무), 웃는, 화난 순서대로 Sprite를 넣으세요")]
     [SerializeField]
     private List<ExpressionSprites> mermaidSpriteList;
     private Image image;
@@ -29,7 +29,7 @@ public class Mermaid : MonoBehaviour
     void Start()
     {
         if (!gameObject.TryGetComponent(out image))
-            Debug.LogError("Image ????? ?? ? ????");
+            Debug.LogError("Image 컴포넌트를 찾을 수 없습니다");
         ice = new Data.ICE[2];
         syrup = new Data.SYRUP[2];
         topping = new Data.TOPPING[2];
@@ -49,15 +49,15 @@ public class Mermaid : MonoBehaviour
         }
         else
         {
-            Debug.Log("����");
+            Debug.Log("실패");
             return false;
         }
     }
 
-    // level? ?? ??? ??
+    // level에 따라 난이도 증가
     public void Setting(int day)
     {
-        //?? ??
+        // 빙수 개수
         int day_index = 0;
         for (int i = 0; i < StageManager.instance.stage.Length; i++)
         {
@@ -77,7 +77,7 @@ public class Mermaid : MonoBehaviour
         SetExpression(EXPRESSION.IDLE);
 
 
-        //??? ??? ?? ice, ??, topping ? ??
+        // 해금된 재료에 따라 ice, 시럽, topping 등 선택
         for(int i = 0; i < bingsuCount; i++)
         {
             //StageManager.instance.IngredientUnlockData.GetRandomIce
