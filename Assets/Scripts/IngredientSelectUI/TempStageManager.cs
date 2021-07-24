@@ -29,6 +29,12 @@ public class TempStageManager : MonoSingleton<TempStageManager>
 
     public void SelectSyrup(Data.SYRUP syrupType)
     {
+        // 얼음이 선택되어 있지 않다면, 선택할 수 없다.
+        if (_selectedIce == Data.ICE.NONE)
+        {
+            return;
+        }
+
         // 시럽잇 선택되어 있지 않다면, 이 시럽 종류를 선택한다.
         if (_selectedSyrup == Data.SYRUP.NONE)
         {
@@ -45,6 +51,12 @@ public class TempStageManager : MonoSingleton<TempStageManager>
 
     public void SelectTopping(Data.TOPPING toppingType)
     {
+        // 얼음이 선택되어 있지 않다면, 선택할 수 없다.
+        if (_selectedIce == Data.ICE.NONE)
+        {
+            return;
+        }
+
         // 토핑이 선택되어 있지 않다면, 이 토핑 종류를 선택한다.
         if (_selectedTopping == Data.TOPPING.NONE)
         {
