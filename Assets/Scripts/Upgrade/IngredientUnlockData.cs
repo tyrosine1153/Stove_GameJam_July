@@ -53,4 +53,22 @@ public class IngredientUnlockData
     {
         return ToppingsUnlocked.Contains(toppingType);
     }
+
+    public Data.ICE GetRandomIce()
+    {
+        int index = Random.Range(0, IcesUnlocked.Count);
+        return IcesUnlocked[index];
+    }
+
+    public Data.SYRUP GetRandomSyrup()
+    {
+        int index = Random.Range(0, SyrupsUnlocked.Count);
+        return SyrupsUnlocked[index];
+    }
+
+    public Data.TOPPING GetRandomTopping()
+    {
+        int index = Random.Range(0, ToppingsUnlocked.Count);
+        return ToppingsUnlocked[index];
+    }
 }
