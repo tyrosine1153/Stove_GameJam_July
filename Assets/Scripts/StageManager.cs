@@ -216,7 +216,7 @@ public class StageManager : MonoBehaviour, IStageManager
         while (mermaidCount > index)    //Day ???? ????, json ?????? ????
         {
             yield return waitForSeconds;    //손님 오기까지 대기 시간
-            //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경 
+            //손님 이미지 활성화 및 스프라이트 (손님 종류)변경, 빙수 개수, 원하는 빙수 변경
             mermaid.Setting(day);
 
             //손님 들어옴, 타이머 시작
@@ -427,12 +427,14 @@ public class StageManager : MonoBehaviour, IStageManager
 
         AddDailyGold(totalBingsuPrice + jewelPrice);
         AddDailyScore(score);
+
+        Debug.Log($"결과: {result}, 획득 골드: {totalBingsuPrice + jewelPrice}, 획득 점수: {score}");
     }
 
     private void OrderFailed()
     {
         ResetBingsu();
-        DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), expectedResult);
+        DeliverDailyRewards(mermaid.GetSatisfiedBingsus(), OrderResult.Fail);
         mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
         --Hp;
         MermaidExit();
