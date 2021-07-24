@@ -10,6 +10,8 @@ public class IngredientUnlockData
     public List<Data.SYRUP> SyrupsUnlocked;
     public List<Data.TOPPING> ToppingsUnlocked;
 
+    private static readonly int NONE_INGREDIENT_PROBABILITY = 10;
+
     public IngredientUnlockData(List<Data.ICE> ices, List<Data.SYRUP> syrups, List<Data.TOPPING> toppings)
     {
         IcesUnlocked = new List<Data.ICE>(ices);
@@ -62,12 +64,24 @@ public class IngredientUnlockData
 
     public Data.SYRUP GetRandomSyrup()
     {
+        // 시럽 없는 것은 10%확률로 등장
+        if (Random.Range(0, 100) < NONE_INGREDIENT_PROBABILITY)
+        {
+            return Data.SYRUP.NONE;
+        }
+
         int index = Random.Range(0, SyrupsUnlocked.Count);
         return SyrupsUnlocked[index];
     }
 
     public Data.TOPPING GetRandomTopping()
     {
+        // 토핑 없는 것은 10%확률로 등장
+        if (Random.Range(0, 100) < NONE_INGREDIENT_PROBABILITY)
+        {
+            return Data.TOPPING.NONE;
+        }
+
         int index = Random.Range(0, ToppingsUnlocked.Count);
         return ToppingsUnlocked[index];
     }

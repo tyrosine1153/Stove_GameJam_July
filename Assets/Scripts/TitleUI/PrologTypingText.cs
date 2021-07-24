@@ -9,11 +9,11 @@ public class PrologTypingText : MonoBehaviour
 {
     [Multiline] [SerializeField] private string typingText;
 
+    [SerializeField]
     private Text _text;
 
     private void Start()
     {
-        _text = GetComponent<Text>() ?? GetComponentInChildren<Text>();
         _text.text = "";
     }
 

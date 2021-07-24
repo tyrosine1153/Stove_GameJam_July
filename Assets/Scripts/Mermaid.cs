@@ -11,63 +11,96 @@ public class ExpressionSprites
 
 public class Mermaid : MonoBehaviour
 {
-    [Header("인어마다 각각의 표정을 HAPPY(Idle), impassive, disappointed, angry 순서대로 Sprite를 넣으세요")]
+    [Header("인어마다 각각의 표정을 idle, impassive, disappointed, angry, happy 순서대로 Sprite를 넣으세요")]
     [SerializeField]
     private List<ExpressionSprites> mermaidSpriteList;
     public Image image;
 
-    public Data.ICE[] ice;
-    public Data.SYRUP[] syrup;
-    public Data.TOPPING[] topping;
+    public Bingsu[] orderedBingsus = new Bingsu[2];
+    public bool[] isOrderSatisfied = new bool[2];
 
-    public int bingsuCount; //빙수 개수
+    public bool IsAllOrderSatisfied
+    {
+        get
+        {
+            for (int i = 0; i < orderedBingsuCount; i++)
+            {
+                if (!isOrderSatisfied[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    // 주문한 빙수 개수
+    public int orderedBingsuCount;
 
     private int mermaidIndex;
 
-    public enum EXPRESSION { HAPPY, IMPASSIVE, DISAPPOINTED, ANGRY }
+    public enum EXPRESSION { IDLE, IMPASSIVE, DISAPPOINTED, ANGRY, HAPPY }
 
     void Start()
     {
         if (!gameObject.TryGetComponent(out image))
             Debug.LogError("Image 컴포넌트를 찾을 수 없습니다");
-        ice = new Data.ICE[2];
-        syrup = new Data.SYRUP[2];
-        topping = new Data.TOPPING[2];
+
+        orderedBingsus[0] = new Bingsu();
+        orderedBingsus[1] = new Bingsu();
     }
 
-    public bool CompareBingsu(Data.ICE selectedIce, Data.SYRUP selectedSyrup, Data.TOPPING selectedTopping)
+    public bool CompareBingsu(Bingsu servedBingsu, out int satisfiedBingsuIndex)
     {
-        if (selectedIce == ice[0] && selectedSyrup == syrup[0] && selectedTopping == topping[0])
+        for (int i = 0; i < orderedBingsuCount; i++)
         {
-            //UI update remove wanted bingsu
-            return true;
-        }
-        else if (selectedIce == ice[1] && selectedSyrup == syrup[1] && selectedTopping == topping[1])
-        {
-            //UI update remove wanted bingsu
-            return true;
-        }
-        else
-        {
-            for (int i = 0; i < 2; i++)
+            if (!isOrderSatisfied[i] && orderedBingsus[i].Equals(servedBingsu))
             {
-                Debug.Log(ice[i]);
-                Debug.Log(syrup[i]);
-                Debug.Log(topping[i]);
+                satisfiedBingsuIndex = i;
+                return true;
             }
-            Debug.Log("실패");
-            return false;
         }
+
+        Debug.Log("올바른 빙수 제공에 실패함.");
+        satisfiedBingsuIndex = -1;
+        return false;
     }
+
+    public List<Bingsu> GetSatisfiedBingsus()
+    {
+        List<Bingsu> bingsus = new List<Bingsu>();
+        for (int i = 0; i < orderedBingsuCount; i++)
+        {
+            if (isOrderSatisfied[i])
+            {
+                bingsus.Add(orderedBingsus[i]);
+            }
+        }
+        return bingsus;
+    }
+
+    public List<Bingsu> GetNotSatisfiedBingsus()
+    {
+        List<Bingsu> bingsus = new List<Bingsu>();
+        for (int i = 0; i < orderedBingsuCount; i++)
+        {
+            if (!isOrderSatisfied[i])
+            {
+                bingsus.Add(orderedBingsus[i]);
+            }
+        }
+        return bingsus;
+    }
+
     private void ResetBingsu()
     {
         for (int i = 0; i < 2; i++)
         {
-            ice[i] = Data.ICE.NONE;
-            syrup[i] = Data.SYRUP.NONE;
-            topping[i] = Data.TOPPING.NONE;
+            orderedBingsus[i].Reset();
         }
     }
+
     // level에 따라 난이도 증가
     public void Setting(int day)
     {
@@ -85,25 +118,25 @@ public class Mermaid : MonoBehaviour
         }
         int selectNum = Random.Range(1, 101);
         if (StageManager.instance.stage[day_index].ice_one >= selectNum)
-            bingsuCount = 1;
+            orderedBingsuCount = 1;
         else
-            bingsuCount = 2;
+            orderedBingsuCount = 2;
 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        SetExpression(EXPRESSION.HAPPY);
+        SetExpression(EXPRESSION.IDLE);
 
 
         // 해금된 재료에 따라 ice, 시럽, topping 등 선택
-        for(int i = 0; i < bingsuCount; i++)
+        for(int i = 0; i < orderedBingsuCount; i++)
         {
-            ice[i] = StageManager.instance.IngredientUnlockData.GetRandomIce();
-            syrup[i] = StageManager.instance.IngredientUnlockData.GetRandomSyrup();
-            topping[i] = StageManager.instance.IngredientUnlockData.GetRandomTopping();
-            Debug.Log(ice[i]);
-            Debug.Log(syrup[i]);
-            Debug.Log(topping[i]);
-        }
+            var ice = StageManager.instance.IngredientUnlockData.GetRandomIce();
+            var syrup = StageManager.instance.IngredientUnlockData.GetRandomSyrup();
+            var topping = StageManager.instance.IngredientUnlockData.GetRandomTopping();
+            orderedBingsus[i] = new Bingsu(ice, syrup, topping);
+            isOrderSatisfied[i] = false;
 
+            Debug.Log($"Order [{i}]: {orderedBingsus[i]}");
+        }
     }
 
     public void SetExpression(EXPRESSION expression)
