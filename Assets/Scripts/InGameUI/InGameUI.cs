@@ -58,9 +58,9 @@ public class InGameUI : MonoBehaviour
         _resultBingsuUI.gameObject.SetActive(state == InGameState.Playing);
     }
 
-    public void SetResultBingsu(Data.ICE selectedIce, Data.SYRUP selectedSyrup, Data.TOPPING selectedTopping)
+    public void SetResultBingsu(Bingsu bingsu)
     {
-        _resultBingsuUI.SetResult(selectedIce, selectedSyrup, selectedTopping);
+        _resultBingsuUI.SetResult(bingsu);
     }
 
     public void UpdateSelectIngredientUI()

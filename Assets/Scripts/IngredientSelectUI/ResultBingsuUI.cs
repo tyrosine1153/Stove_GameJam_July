@@ -16,14 +16,14 @@ public class ResultBingsuUI : MonoBehaviour
 
     public void ResetAllIngredients()
     {
-        SetResult(Data.ICE.NONE, Data.SYRUP.NONE, Data.TOPPING.NONE);
+        SetResult(new Bingsu());
     }
 
-    public void SetResult(Data.ICE iceType, Data.SYRUP syrupType, Data.TOPPING toppingType)
+    public void SetResult(Bingsu bingsu)
     {
-        SetIce(iceType);
-        SetSyrup(syrupType);
-        SetTopping(toppingType);
+        SetIce(bingsu.Ice);
+        SetSyrup(bingsu.Syrup);
+        SetTopping(bingsu.Topping);
     }
 
     private void SetIce(Data.ICE iceType)
