@@ -16,7 +16,7 @@ public class StageManager : MonoBehaviour
     private Data.StageJson[] stage;
 
     private int mermaidCount;
-    private int day = 0;
+    private int day = 0;    //0일차부터 29일차까지 30일
     private bool IsGuest = false;
     private int hp = 3;
     private float time = 0;
@@ -33,7 +33,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         if (jsonFile)
-            stage = JsonUtility.FromJson<Data.Wrapper>(jsonFile.text).stage;
+            stage = JsonUtility.FromJson<Data.Stage>("{\"stage\":" + jsonFile.text + "}").stage;
         else
             Debug.LogError("Json파일이 존재하지 않음");
     }
@@ -56,6 +56,7 @@ public class StageManager : MonoBehaviour
     {
         mermaidCount = stage[day].mermaidCount;
         mermaid.bingsuCount = stage[day].IceCount;
+        // UI창에서는 Day + 1로 계산
         StartCoroutine("guestCome");
     }
     void CloseStore()
@@ -64,6 +65,10 @@ public class StageManager : MonoBehaviour
         //정산
         //각종 초기화 등
         day++;
+        if(day >= 30)
+        {
+            //해피 엔딩
+        }
     }
 
     IEnumerator guestCome()
@@ -129,13 +134,13 @@ public class StageManager : MonoBehaviour
             {
                 //진주
                 // 보석 증가, 표정
-                mermaid.setEmotion(Mermaid.EXPRESSION.ANGRY);
+                mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             }
             else if (time > 8)
             {
                 //루비
                 // 보석 증가, 표정
-                mermaid.setEmotion(Mermaid.EXPRESSION.IDLE);
+                mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else
             {
@@ -150,7 +155,7 @@ public class StageManager : MonoBehaviour
                 {
                     hp++;
                 }
-                mermaid.setEmotion(Mermaid.EXPRESSION.HAPPY);
+                mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
             }
         }
         else

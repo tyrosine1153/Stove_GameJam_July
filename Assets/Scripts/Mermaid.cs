@@ -37,11 +37,11 @@ public class Mermaid : MonoBehaviour
     {
         //빙수 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        setEmotion(EXPRESSION.IDLE);
+        SetExpression(EXPRESSION.IDLE);
         //Level에 따른 ice, topping 선택
     }
 
-    public void setEmotion(EXPRESSION expression)
+    public void SetExpression(EXPRESSION expression)
     {
         image.sprite = mermaidSpriteList[mermaidIndex].sprites[((int)expression)];
     }
