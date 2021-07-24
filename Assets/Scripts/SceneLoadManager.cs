@@ -19,6 +19,12 @@ public class SceneLoadManager : PersistentSingleton<SceneLoadManager>
         crossFade = GetComponentInChildren<Animator>();
     }
 
+    public void LoadTitleScene()
+    {
+        StartCoroutine(LoadScene(0));
+
+    }
+    
     public void LoadNextScene()
     {
         StartCoroutine(LoadScene(SceneManager.GetActiveScene().buildIndex + 1));

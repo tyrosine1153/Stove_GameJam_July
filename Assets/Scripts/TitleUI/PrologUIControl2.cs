@@ -30,7 +30,7 @@ public class PrologUIControl2 : MonoBehaviour
             prologPages[_pageCount].SetActive(true);
             
             var a = prologPages[_pageCount].GetComponentInChildren<PrologTypingText>();
-            if (a != null) a.TypeText();
+            if (a != null) a.TypeText(null);
         }
         else
         {
