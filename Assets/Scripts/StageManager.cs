@@ -176,7 +176,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
 
         WaitWhile waitWhile = new WaitWhile(() => IsGuest);
-        WaitForSeconds waitForSeconds = new WaitForSeconds(2);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
         int index = 0;
         while (mermaidCount > index)    //Day ???? ????, json ?????? ????
         {
@@ -301,7 +301,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void UpdateInGameUI()
     {
-        inGameUI.SetScore(dailyScore);
+        //inGameUI.SetScore(dailyScore);
         inGameUI.SetGold(gold);
         inGameUI.SetDay(day);
         inGameUI.SetHp(hp);
