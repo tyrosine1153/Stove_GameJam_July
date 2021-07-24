@@ -9,22 +9,6 @@ public enum InGameState
     Playing,
 }
 
-[CustomEditor(typeof(StageManager))]
-public class DuckGenerateButton : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        StageManager generator = (StageManager)target;
-        if (GUILayout.Button("Open Store"))
-        {
-            for(int i = 0; i < 1000; i++)
-                generator.OpenStore();
-        }
-    }
-}
-
 public class StageManager : MonoBehaviour, IStageManager
 {
     public static StageManager instance;
@@ -44,7 +28,8 @@ public class StageManager : MonoBehaviour, IStageManager
     private int hp = 3;
     private float time = 0;
     private int gold = 0;
-    private int score = 0;
+    private int dailyScore = 0;
+    private int dailyGold = 0;
 
     private InGameState currentState = InGameState.Closed;
     public InGameState CurrentState
@@ -54,12 +39,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private IngredientUnlockData ingredientUnlockData;
     public IngredientUnlockData IngredientUnlockData => ingredientUnlockData;
-
-    public int one = 0;
-    public int two = 0;
-    public int three = 0;
-    public int four = 0;
-    public int five = 0;
 
     Data.ICE selectedIce;
     Data.SYRUP selectedSyrup;
@@ -106,7 +85,7 @@ public class StageManager : MonoBehaviour, IStageManager
             {
                 mermaid.SetExpression(Mermaid.EXPRESSION.DISAPPOINTED);
             }
-            if (time > 15)
+            else if (time > 15)
             {
                 // ???? UI(???? ??) ??????
                 mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
@@ -155,31 +134,12 @@ public class StageManager : MonoBehaviour, IStageManager
             }
             index.RemoveAt(rnd);
         }
-
-        //For Debuging
-        switch (mermaidCount)
-        {
-            case 1:
-                one++;
-                break;
-            case 2:
-                two++;
-                break;
-            case 3:
-                three++;
-                break;
-            case 4:
-                four++;
-                break;
-            case 5:
-                five++;
-                break;
-
-        }
     }
 
     public void OpenStore()
     {
+        dailyGold = 0;
+        dailyScore = 0;
         SetLevel();
 
         currentState = InGameState.Playing;
@@ -196,7 +156,7 @@ public class StageManager : MonoBehaviour, IStageManager
         //Scene 변경
         //정산
         //각종 초기화 등
-        gold += score;
+        gold += dailyGold;
 
         currentState = InGameState.Closed;
 
@@ -216,7 +176,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
 
         WaitWhile waitWhile = new WaitWhile(() => IsGuest);
-        WaitForSeconds waitForSeconds = new WaitForSeconds(2);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
         int index = 0;
         while (mermaidCount > index)    //Day ???? ????, json ?????? ????
         {
@@ -341,6 +301,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void UpdateInGameUI()
     {
+        //inGameUI.SetScore(dailyScore);
         inGameUI.SetGold(gold);
         inGameUI.SetDay(day);
         inGameUI.SetHp(hp);
@@ -364,9 +325,14 @@ public class StageManager : MonoBehaviour, IStageManager
             return;
         }
         SubIce(true);
+        Debug.Log(mermaid.bingsuCount);
         if (mermaid.bingsuCount == 0)
         {
             MermaidExit();
+        }
+        else
+        {
+            ResetBingsu();
         }
 
     }
@@ -384,6 +350,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         if (isSuccess)
         {
+            ResetBingsu();
             int price = 0;
             mermaid.bingsuCount--;
             switch (selectedIce)
@@ -422,29 +389,32 @@ public class StageManager : MonoBehaviour, IStageManager
                     price += 2700;
                     break;
             }
-            score += price / 20;
+            UpdateGold(price / 20);
             if (time > 10)
             {
                 //진주
                 // 보석 증가, 표정
-                score += 100;
+                UpdateScore(100);
+                UpdateGold(20);
                 //mermaid.SetExpression(Mermaid.EXPRESSION.ANGRY);
             }
             else if (time > 8)
             {
                 //루비
                 // 보석 증가, 표정
-                score += 250;
+                UpdateScore(250);
+                UpdateGold(50);
                 //mermaid.SetExpression(Mermaid.EXPRESSION.IDLE);
             }
             else
             {
                 //다이아
                 // 보석 증가, 표정
-                score += 500;
+                UpdateGold(100);
+                UpdateScore(500);
                 if (hp >= 3)
                     //점수 증가
-                    score += 550;
+                    UpdateScore(550);
                 else
                     hp++;
                 //mermaid.SetExpression(Mermaid.EXPRESSION.HAPPY);
@@ -458,7 +428,17 @@ public class StageManager : MonoBehaviour, IStageManager
             if (hp == 0)
                 End();
         }
-        IsGuest = false;
+    }
+
+    private void UpdateGold(int money)
+    {
+        dailyGold += money;
+    }
+
+    private void UpdateScore(int score)
+    {
+        dailyScore += score;
+        //UI Update
     }
 
     private void ResetBingsu()

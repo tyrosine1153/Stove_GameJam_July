@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class InGameUI : MonoBehaviour
 {
     [SerializeField]
+    private Text _highScore;
+
+    [SerializeField]
     private Text _dayText;
 
     [SerializeField]
@@ -25,6 +28,13 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     private GameObject _openButton;
+
+    public void SetScore(int score)
+    {
+        if(int.Parse(_highScore.text) < score)
+            _highScore.text = score.ToString();
+
+    }
 
     public void SetDay(int day)
     {

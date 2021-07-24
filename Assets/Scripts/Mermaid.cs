@@ -49,12 +49,6 @@ public class Mermaid : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < 2; i++)
-            {
-                Debug.Log(ice[i]);
-                Debug.Log(syrup[i]);
-                Debug.Log(topping[i]);
-            }
             Debug.Log("실패");
             return false;
         }
@@ -90,7 +84,7 @@ public class Mermaid : MonoBehaviour
             bingsuCount = 2;
 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        SetExpression(EXPRESSION.HAPPY);
+        SetExpression(EXPRESSION.IMPASSIVE);
 
 
         // 해금된 재료에 따라 ice, 시럽, topping 등 선택
@@ -103,7 +97,6 @@ public class Mermaid : MonoBehaviour
             Debug.Log(syrup[i]);
             Debug.Log(topping[i]);
         }
-
     }
 
     public void SetExpression(EXPRESSION expression)
