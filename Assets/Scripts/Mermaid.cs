@@ -84,7 +84,7 @@ public class Mermaid : MonoBehaviour
             bingsuCount = 2;
 
         mermaidIndex = Random.Range(0, mermaidSpriteList.Count);
-        SetExpression(EXPRESSION.HAPPY);
+        SetExpression(EXPRESSION.IMPASSIVE);
 
 
         // 해금된 재료에 따라 ice, 시럽, topping 등 선택
