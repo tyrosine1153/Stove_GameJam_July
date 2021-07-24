@@ -32,9 +32,20 @@ public class Bingsu : IEquatable<Bingsu>
 
     public int CalculatePrice()
     {
-        var icePrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData(Ice).IngredientGameData.UnlockCost;
-        var toppingPrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData(Topping).IngredientGameData.UnlockCost;
-        return icePrice + toppingPrice;
+        int totalPrice = 0;
+        if (Ice != Data.ICE.NONE)
+        {
+            var icePrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData(Ice).IngredientGameData.UnlockCost;
+            totalPrice += icePrice;
+        }
+
+        if (Topping != Data.TOPPING.NONE)
+        {
+            var toppingPrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData(Topping).IngredientGameData.UnlockCost;
+            totalPrice += toppingPrice;
+        }
+
+        return totalPrice;
     }
 
     public void Reset()
