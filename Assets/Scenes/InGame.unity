@@ -485,6 +485,13 @@ MonoBehaviour:
   mermaid: {fileID: 1285339574}
   jsonFile: {fileID: 4900000, guid: fdf85447d32234cdeb52cbbaae8c77b5, type: 3}
   inGameUI: {fileID: 1993027635}
+  stage: []
+  day: 0
+  one: 0
+  two: 0
+  three: 0
+  four: 0
+  five: 0
 --- !u!4 &1104314648
 Transform:
   m_ObjectHideFlags: 0
@@ -550,14 +557,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mermaidSpriteList:
-  - sprites:
+  - expression:
     - {fileID: 21300000, guid: 7f1cf86cb63294348b98b4dc1df32acb, type: 3}
     - {fileID: 21300000, guid: 7f1cf86cb63294348b98b4dc1df32acb, type: 3}
     - {fileID: 21300000, guid: 7f1cf86cb63294348b98b4dc1df32acb, type: 3}
-  - sprites:
-    - {fileID: 21300000, guid: 21e147c89b2654366828a9471e25cd0c, type: 3}
-    - {fileID: 21300000, guid: 21e147c89b2654366828a9471e25cd0c, type: 3}
-    - {fileID: 21300000, guid: 21e147c89b2654366828a9471e25cd0c, type: 3}
   ice: 0
   syrup: 0
   topping: 0
