@@ -24,7 +24,8 @@ public class UpgradeStatus : MonoBehaviour
     void setItems()
     {
         int enumCount = getEnumCount();
-
+        if (ingredientType == IngredientType.Syrup)
+            Debug.Log(enumCount);
         for (int idx = enumCount - 1; idx > 0; idx--)
         {
             var newObj = Instantiate(prefab, item.transform);
@@ -47,7 +48,7 @@ public class UpgradeStatus : MonoBehaviour
                 count = System.Enum.GetValues(typeof(Data.ICE)).Length;
                 break;
             case IngredientType.Syrup:
-                count = System.Enum.GetValues(typeof(Data.SYRUP)).Length;
+                count = 5;//System.Enum.GetValues(typeof(Data.SYRUP)).Length;
                 break;
             case IngredientType.Topping:
                 count = System.Enum.GetValues(typeof(Data.TOPPING)).Length;
