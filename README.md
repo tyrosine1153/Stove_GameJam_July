@@ -1,5 +1,5 @@
 # Stove_GameJam_July
-
+![Bingsurang](https://user-images.githubusercontent.com/48403325/126897896-79ea7724-375a-4abf-8d47-bf3bc1aafa08.png)
 
 안녕하세요! 타이쿤 게임 <빙수랑>을 개발한 Bingsu Ya!팀입니다.
 
