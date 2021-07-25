@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5717713106108494486, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
@@ -349,6 +349,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 148417623264511162, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4256897908564746153, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -436,6 +440,22 @@ PrefabInstance:
     - target: {fileID: 4256897908564746157, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
       propertyPath: m_Name
       value: EndingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256897910425547180, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256897910425547183, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256897910425547183, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256897910425547183, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
