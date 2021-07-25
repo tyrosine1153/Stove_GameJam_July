@@ -471,6 +471,11 @@ public class StageManager : MonoBehaviour, IStageManager
         dailyBingsuPrice += totalBingsuPrice;
         dailyScore += addedScore;
 
+        if (addedScore > 0)
+        {
+            inGameUI.ShowResultFloater(result, addedScore);
+        }
+
         Debug.Log($"결과: {result}, 획득 점수: {addedScore}");
     }
 

@@ -45,6 +45,9 @@ public class InGameUI : MonoBehaviour
     private InGameDailyResultUI _dailyResultUI;
 
     [SerializeField]
+    private OrderResultFloater _resultFloater;
+
+    [SerializeField]
     private GameObject _recipeButton;
 
     [SerializeField]
@@ -129,5 +132,10 @@ public class InGameUI : MonoBehaviour
     {
         _dailyResultUI.gameObject.SetActive(true);
         _dailyResultUI.SetResult(result);
+    }
+
+    public void ShowResultFloater(OrderResult jewel, int score)
+    {
+        _resultFloater.ShowResult(jewel, score);
     }
 }
