@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5717713106108494486, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5058be1d2dfb06541a3e83fd58d0853b, type: 3}
@@ -440,6 +440,12 @@ PrefabInstance:
     - target: {fileID: 4256897908564746157, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
       propertyPath: m_Name
       value: EndingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256897910425547177, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
+      propertyPath: typingText
+      value: "\uAE30\uD68D : \uCD5C\uC131\uBBFC, \uCD5C\uC720\uBE48\r\n\uC544\uD2B8
+        : \uACE0\uB2E4\uD604, \uC815\uC2DC\uD638\r\n\uD504\uB85C\uADF8\uB798\uBC0D
+        : \uCD5C\uC544\uC601, \n\uC11C\uC758\uC218, \uC1A1\uB098\uB9AC, \uC720\uC815\uBBFC"
       objectReference: {fileID: 0}
     - target: {fileID: 4256897910425547180, guid: 14788bf128540a94c9f99a5c5c0c64be, type: 3}
       propertyPath: m_IsActive

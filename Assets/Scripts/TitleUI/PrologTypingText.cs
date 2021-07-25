@@ -9,9 +9,9 @@ public class PrologTypingText : MonoBehaviour
 {
     [Multiline] [SerializeField] private string typingText;
     [SerializeField] private Text textUI;
+    public bool FlipedText { get; private set; }
 
     private Coroutine _coTypeText;
-    public bool FlipedText { get; private set; }
 
     private void Start()
     {
@@ -21,7 +21,9 @@ public class PrologTypingText : MonoBehaviour
 
     public void TypeText(string text)
     {
-        _coTypeText = StartCoroutine(CoTypeText(text ?? typingText));
+        if (string.IsNullOrEmpty(text)) text = typingText;
+        
+        _coTypeText = StartCoroutine(CoTypeText(text));
     }
 
     IEnumerator CoTypeText(string text)
