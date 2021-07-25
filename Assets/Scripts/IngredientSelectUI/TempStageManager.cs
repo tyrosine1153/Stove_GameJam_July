@@ -21,9 +21,9 @@ public class TempStageManager : MonoSingleton<TempStageManager>, IStageManager
     {
         var ingredientData = IngredientGameDataHolder.Instance.IngredientGameDatas;
         ingredientUnlockData = new IngredientUnlockData(
-                ingredientData.GetAllFreeIces(),
+                new List<Data.ICE>() { Data.ICE.WATER, Data.ICE.WHITE_MILK, Data.ICE.CHOCO_MILK, Data.ICE.MINTCHOCO_MILK, Data.ICE.SEAWATER, Data.ICE.STRAWBERRY_MILK },
                 ingredientData.GetAllFreeSyrups(),
-                ingredientData.GetAllFreeToppings()
+                new List<Data.TOPPING>() { Data.TOPPING.ALMOND, Data.TOPPING.CHOCOLATE, Data.TOPPING.FRUIT_COCK, Data.TOPPING.LEMON, Data.TOPPING.REDBEAN, Data.TOPPING.STRAWBERRY }
             );
 
         ResetIngredientsForTest();
