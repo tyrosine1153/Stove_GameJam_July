@@ -36,12 +36,14 @@ public class Bingsu : IEquatable<Bingsu>
         if (Ice != Data.ICE.NONE)
         {
             var icePrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetIceGameData(Ice).IngredientGameData.UnlockCost;
+            if (icePrice == 0) icePrice = 10;
             totalPrice += icePrice;
         }
 
         if (Topping != Data.TOPPING.NONE)
         {
             var toppingPrice = IngredientGameDataHolder.Instance.IngredientGameDatas.GetToppingGameData(Topping).IngredientGameData.UnlockCost;
+            if (toppingPrice == 0) toppingPrice = 10;
             totalPrice += toppingPrice;
         }
 
