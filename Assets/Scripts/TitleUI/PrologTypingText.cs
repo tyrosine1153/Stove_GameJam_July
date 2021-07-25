@@ -12,6 +12,7 @@ public class PrologTypingText : MonoBehaviour
 
     private Coroutine _coTypeText;
     public bool FlipedText { get; private set; }
+
     private void Start()
     {
         textUI.text = "";
@@ -27,11 +28,12 @@ public class PrologTypingText : MonoBehaviour
     {
         const float waitTime = 0.1f;
         textUI.text = "";
-        foreach (var t in text)
+        for (int i = 0; i < text.Length; i++)
         {
-            textUI.text += t;
+            textUI.text += text[i];
             yield return new WaitForSeconds(waitTime);
         }
+        FlipedText = true;
     }
 
     public void FlipText()

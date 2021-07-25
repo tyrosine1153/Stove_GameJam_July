@@ -747,13 +747,13 @@ PrefabInstance:
       objectReference: {fileID: 1957239280}
     - target: {fileID: 4380409691912339065, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: "\uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294 \n\uC4F0\uB7EC\uC838\uC788\uB294
+      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294\n\uC4F0\uB7EC\uC838\uC788\uB294
         \uC778\uC5B4\uC5D0\uAC8C\n\uAC00\uC9C0\uACE0 \uC788\uB294 \uBE59\uC218\uB97C
         \uBA39\uC600\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409691912339071, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: m_Text
-      value: "\uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294 \n\uC4F0\uB7EC\uC838\uC788\uB294
+      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294\n\uC4F0\uB7EC\uC838\uC788\uB294
         \uC778\uC5B4\uC5D0\uAC8C\n\uAC00\uC9C0\uACE0 \uC788\uB294 \uBE59\uC218\uB97C
         \uBA39\uC600\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
@@ -767,14 +767,14 @@ PrefabInstance:
       objectReference: {fileID: 828375656}
     - target: {fileID: 4380409691936997817, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: " \uBE59\uC218 \uAC00\uAC8C \uD3D0\uC5C5 \uC804\uB0A0, \n\uB108\uBB34
-        \uB354\uC6CC\uC9C4 \uB0A0\uC528 \uD0D3\uC778\uC9C0 \n\uC778\uC5B4\uAC00 \uC721\uC9C0\uC5D0
+      value: " \uBE59\uC218 \uAC00\uAC8C \uD3D0\uC5C5 \uC804\uB0A0,\n\uB108\uBB34
+        \uB354\uC6CC\uC9C4 \uB0A0\uC528 \uD0D3\uC778\uC9C0\n\uC778\uC5B4\uAC00 \uC721\uC9C0\uC5D0
         \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409691936997823, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: m_Text
-      value: "\uBE59\uC218 \uAC00\uAC8C \uD3D0\uC5C5 \uC804\uB0A0, \n\uB108\uBB34
-        \uB354\uC6CC\uC9C4 \uB0A0\uC528 \uD0D3\uC778\uC9C0 \n\uC778\uC5B4\uAC00 \uC721\uC9C0\uC5D0
+      value: " \uBE59\uC218 \uAC00\uAC8C \uD3D0\uC5C5 \uC804\uB0A0,\n\uB108\uBB34
+        \uB354\uC6CC\uC9C4 \uB0A0\uC528 \uD0D3\uC778\uC9C0\n\uC778\uC5B4\uAC00 \uC721\uC9C0\uC5D0
         \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409691936997823, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
@@ -783,8 +783,8 @@ PrefabInstance:
       objectReference: {fileID: 12800000, guid: 200c8ef3bedc59c439273ab4538a6819, type: 3}
     - target: {fileID: 4380409692226227923, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: m_Text
-      value: "\r\uC4F0\uB7EC\uC838\uC788\uB358 \uC778\uC5B4\uB294 \uBE59\uC218\uB97C
-        \uB9DB\uBCF4\uACE0 \n\uADF8 \uC790\uB9AC\uC5D0\uC11C \uBC8C\uB5A1 \uC77C\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4."
+      value: " \r\uC4F0\uB7EC\uC838\uC788\uB358 \uC778\uC5B4\uB294 \uBE59\uC218\uB97C
+        \uB9DB\uBCF4\uACE0\n\uADF8 \uC790\uB9AC\uC5D0\uC11C \uBC8C\uB5A1 \uC77C\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409692226227925, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: textUI
@@ -792,8 +792,8 @@ PrefabInstance:
       objectReference: {fileID: 1234271178}
     - target: {fileID: 4380409692226227925, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: "\r\uC4F0\uB7EC\uC838\uC788\uB358 \uC778\uC5B4\uB294 \uBE59\uC218\uB97C
-        \uB9DB\uBCF4\uACE0 \n\uADF8 \uC790\uB9AC\uC5D0\uC11C \uBC8C\uB5A1 \uC77C\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4."
+      value: " \r\uC4F0\uB7EC\uC838\uC788\uB358 \uC778\uC5B4\uB294 \uBE59\uC218\uB97C
+        \uB9DB\uBCF4\uACE0\n\uADF8 \uC790\uB9AC\uC5D0\uC11C \uBC8C\uB5A1 \uC77C\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409692778222921, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: textUI
@@ -801,14 +801,14 @@ PrefabInstance:
       objectReference: {fileID: 748184506}
     - target: {fileID: 4380409692778222921, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: "\uC778\uC5B4\uB294 \r\uC544\uC800\uC528\uC758 \uC190\uC5D0 \n\uB2E4\uC774\uC544\uB97C
-        \uC950\uC5B4\uC8FC\uACE0 \n\uB0B4\uC77C\uB3C4 \uB610 \uBCF4\uC790\uBA70 \uBC14\uB2E4
+      value: " \uC778\uC5B4\uB294 \r\uC544\uC800\uC528\uC758 \uC190\uC5D0\n\uB2E4\uC774\uC544\uB97C
+        \uC950\uC5B4\uC8FC\uACE0\n\uB0B4\uC77C\uB3C4 \uB610 \uBCF4\uC790\uBA70 \uBC14\uB2E4
         \uC18D\uC73C\uB85C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409692778222927, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: m_Text
-      value: "\uC778\uC5B4\uB294 \r\uC544\uC800\uC528\uC758 \uC190\uC5D0 \n\uB2E4\uC774\uC544\uB97C
-        \uC950\uC5B4\uC8FC\uACE0 \n\uB0B4\uC77C\uB3C4 \uB610 \uBCF4\uC790\uBA70 \uBC14\uB2E4
+      value: " \uC778\uC5B4\uB294 \r\uC544\uC800\uC528\uC758 \uC190\uC5D0\n\uB2E4\uC774\uC544\uB97C
+        \uC950\uC5B4\uC8FC\uACE0\n\uB0B4\uC77C\uB3C4 \uB610 \uBCF4\uC790\uBA70 \uBC14\uB2E4
         \uC18D\uC73C\uB85C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 5614099241442258402, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}

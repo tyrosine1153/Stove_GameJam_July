@@ -26,9 +26,9 @@ public class PrologUIControl2 : MonoBehaviour
 
     public void FlipPage()
     {
+        if (!typingTexts[_pageCount].FlipedText) return;
         if (_pageCount < prologPages.Length - 1)
         {
-            if (!typingTexts[_pageCount].FlipedText) return;
             prologPages[_pageCount++].SetActive(false);
             prologPages[_pageCount].SetActive(true);
 
