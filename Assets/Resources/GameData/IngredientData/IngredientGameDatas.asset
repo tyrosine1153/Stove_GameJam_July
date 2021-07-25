@@ -138,7 +138,7 @@ MonoBehaviour:
   - ToppingType: 1
     IngredientGameData:
       DisplayName: "\uCD08\uCF5C\uB9BF"
-      ResultSprite: {fileID: 21300000, guid: b0300fb6f86864a33a836685fdb6d258, type: 3}
+      ResultSprite: {fileID: 21300000, guid: 9b9af0edcae9b42fcbfe16f6bef38e57, type: 3}
       IngredientSprite: {fileID: 21300000, guid: b476f88bbc615441b945bbd7088f8a92, type: 3}
       UnlockCost: 12800
   - ToppingType: 2
