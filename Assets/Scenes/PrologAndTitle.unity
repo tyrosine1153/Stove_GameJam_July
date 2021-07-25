@@ -837,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 748184506}
     - target: {fileID: 4380409692778222921, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: " \uC778\uC5B4\uB294 \r\uC544\uC800\uC528\uC758 \uC190\uC5D0\n\uB2E4\uC774\uC544\uB97C
+      value: " \uC778\uC5B4\uB294 \r\uB2F9\uC2E0\uC758 \uC190\uC5D0\n\uB2E4\uC774\uC544\uB97C
         \uC950\uC5B4\uC8FC\uACE0\n\uB0B4\uC77C\uB3C4 \uB610 \uBCF4\uC790\uBA70 \uBC14\uB2E4
         \uC18D\uC73C\uB85C \uC0AC\uB77C\uC84C\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
