@@ -27,25 +27,25 @@ MonoBehaviour:
       UnlockCost: 200
   - IceType: 3
     IngredientGameData:
-      DisplayName: "\uD770 \uC6B0\uC720"
+      DisplayName: "\uBC14\uB2D0\uB77C"
       ResultSprite: {fileID: 21300000, guid: a273ce6e479914cb6985c16bef232eae, type: 3}
       IngredientSprite: {fileID: 21300000, guid: b042e647f3f8545af84ecb705bcec555, type: 3}
       UnlockCost: 800
   - IceType: 5
     IngredientGameData:
-      DisplayName: "\uBBFC\uD2B8\uCD08\uCF54 \uC6B0\uC720"
+      DisplayName: "\uBBFC\uD2B8\uCD08\uCF54"
       ResultSprite: {fileID: 21300000, guid: f36f02055a7974e53959872f1250844c, type: 3}
       IngredientSprite: {fileID: 21300000, guid: b43276f5f35a248c0bdadfdd97c2f52e, type: 3}
       UnlockCost: 3200
   - IceType: 4
     IngredientGameData:
-      DisplayName: "\uCD08\uCF54 \uC6B0\uC720"
+      DisplayName: "\uCD08\uCF54"
       ResultSprite: {fileID: 21300000, guid: 02fa44464a3994868b4d60d45a464b82, type: 3}
       IngredientSprite: {fileID: 21300000, guid: e407c0a53fff3400ab48a32ed4c9de6b, type: 3}
       UnlockCost: 12800
   - IceType: 2
     IngredientGameData:
-      DisplayName: "\uB538\uAE30 \uC6B0\uC720"
+      DisplayName: "\uB538\uAE30"
       ResultSprite: {fileID: 21300000, guid: 95a7b602605b447fc984a8289806e667, type: 3}
       IngredientSprite: {fileID: 21300000, guid: bb0b088e1346a4691aeb721f6dca261c, type: 3}
       UnlockCost: 51200
