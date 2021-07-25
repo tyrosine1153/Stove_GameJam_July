@@ -22,6 +22,7 @@ public class StageManager : MonoBehaviour, IStageManager
     public static StageManager instance;
 
     private static readonly int MAX_HP = 3;
+    private static readonly int MAX_DAY = 20;
 
     [Header("인어")]
     public Mermaid mermaid;
@@ -230,7 +231,7 @@ public class StageManager : MonoBehaviour, IStageManager
         day++;
         inGameUI.SetDay(day);
 
-        if (day >= 30)
+        if (day >= MAX_DAY)
         {
             MoveEndingScene(true);
         }
