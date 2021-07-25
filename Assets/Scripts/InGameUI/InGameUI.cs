@@ -54,6 +54,9 @@ public class InGameUI : MonoBehaviour
     private Button _serveButton;
 
     [SerializeField]
+    private GameObject _settingButton;
+
+    [SerializeField]
     private GameObject _openButton;
 
     public void SetDay(int day)
@@ -86,6 +89,8 @@ public class InGameUI : MonoBehaviour
     {
         SetOrderUIEnable(false);
         SetServeButtonAInteractive(false);
+        _hpUI.gameObject.SetActive(state == InGameState.Playing);
+        _settingButton.SetActive(state == InGameState.Closed);
         _serveButton.gameObject.SetActive(state == InGameState.Playing);
         _recipeButton.SetActive(state == InGameState.Closed);
         _guestObject.SetActive(state == InGameState.Playing);

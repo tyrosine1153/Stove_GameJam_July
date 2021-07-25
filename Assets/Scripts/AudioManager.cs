@@ -29,10 +29,28 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField]
     private AudioSource _sfxSource;
 
-    [SerializeField]
-    private Animator _animator;
-    private static readonly int In = Animator.StringToHash("FadeIn");
-    private static readonly int Out = Animator.StringToHash("FadeOut");
+    //[SerializeField]
+    //private Animator _animator;
+
+    public float BgmVolume => _audioSource.volume;
+    public float SfxVolume => _sfxSource.volume;
+
+    //private static readonly int In = Animator.StringToHash("FadeIn");
+    //private static readonly int Out = Animator.StringToHash("FadeOut");
+
+    private static readonly string BGM_VOLUME_KEY = "BgmVolume";
+    private static readonly string SFX_VOLUME_KEY = "SfxVolume";
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        var bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, 0.5f);
+        var sfxVolume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 0.5f);
+
+        SetBgmVolume(bgmVolume);
+        SetSfxVolume(sfxVolume);
+    }
 
     public void PlaySfx(SfxType sfxType)
     {
@@ -49,6 +67,21 @@ public class AudioManager : PersistentSingleton<AudioManager>
         _audioSource.Play();
     }
 
+    public void SetBgmVolume(float volume)
+    {
+        _audioSource.volume = volume;
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        _sfxSource.volume = volume;
+        PlayerPrefs.SetFloat(SFX_VOLUME_KEY, volume);
+        PlayerPrefs.Save();
+    }
+
+    /*
     public void FadeIn(int clipNumber)
     {
         _audioSource.clip = _audioClips[clipNumber] ?? _audioClips[0];
@@ -68,5 +101,5 @@ public class AudioManager : PersistentSingleton<AudioManager>
         
         _audioSource.Stop();
     }
-
+    */
 }

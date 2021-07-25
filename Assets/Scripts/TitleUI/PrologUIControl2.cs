@@ -37,7 +37,7 @@ public class PrologUIControl2 : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-            AudioManager.Instance.FadeIn(onEndPrologAudio);
+            AudioManager.Instance.PlayBgm(onEndPrologAudio);
         }
 
     }
@@ -45,6 +45,6 @@ public class PrologUIControl2 : MonoBehaviour
     public void SkipPages()
     {
         gameObject.SetActive(false);
-        AudioManager.Instance.FadeIn(onEndPrologAudio);
+        AudioManager.Instance.PlayBgm(onEndPrologAudio);
     }
 }

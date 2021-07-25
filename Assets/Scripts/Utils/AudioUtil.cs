@@ -13,4 +13,14 @@ public class AudioUtil : MonoBehaviour
     {
         AudioManager.Instance.PlaySfx(SfxType.Page);
     }
+
+    public void SetBgmVolume(float volume)
+    {
+        AudioManager.Instance.SetBgmVolume(volume);
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        AudioManager.Instance.SetSfxVolume(volume);
+    }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2526534359329087812}
   - component: {fileID: 2526534359329087815}
   - component: {fileID: 407190169564823184}
-  - component: {fileID: 2526534359329087814}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -61,7 +60,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b4399b40b8d6d475cbc6d588c102197a, type: 3}
   - {fileID: 8300000, guid: d2ac362b05ea641dab6811eb8fcf5417, type: 3}
   _sfxSource: {fileID: 407190169564823184}
-  _animator: {fileID: 2526534359329087814}
 --- !u!82 &2526534359329087815
 AudioSource:
   m_ObjectHideFlags: 0
@@ -254,22 +252,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &2526534359329087814
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526534359329087809}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: caa7a42938da68544886e5198742e929, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
