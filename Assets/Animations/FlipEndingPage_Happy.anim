@@ -20,13 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - time: 2
-      value: {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - time: 4.016667
-      value: {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - time: 7
-      value: {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
+      value: {fileID: 21300000, guid: 2428d6774bbcb09429e5a2e55d955dc4, type: 3}
+    - time: 8
+      value: {fileID: 21300000, guid: 2428d6774bbcb09429e5a2e55d955dc4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
@@ -46,16 +42,14 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
-    - {fileID: 21300000, guid: 8baafd36090a9488ba5b7cf188570d7b, type: 3}
+    - {fileID: 21300000, guid: 2428d6774bbcb09429e5a2e55d955dc4, type: 3}
+    - {fileID: 21300000, guid: 2428d6774bbcb09429e5a2e55d955dc4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 7.016667
+    m_StopTime: 8.016666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -77,7 +71,10 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: TypeText
-    data: "\uB300\uCDA9 \uD574\uD53C\uC5D4\uB529 \uC2A4\uD06C\uB9BD\uD2B8"
+    data: "\uBE59\uC218\uC758 \uB9DB\uACFC \uB2F9\uC2E0\uC758 \uC13C\uC2A4\uAC00
+      \uC778\uC5B4\uB4E4\uC744 \uD640\uB838\uC2B5\uB2C8\uB2E4! \uB2F9\uC2E0\uC758
+      \uD3B8\uC774 \uB41C \uC778\uC5B4\uB4E4\uC774\uC190\uB2D8\uB4E4\uC744 \uB04C\uC5EC\uB4E4\uC600\uACE0
+      \uB2F9\uC2E0\uC740 \uBD80\uC790\uAC00 \uB42C\uC2B5\uB2C8\uB2E4! \uCD95\uD558\uB4DC\uB824\uC694"
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

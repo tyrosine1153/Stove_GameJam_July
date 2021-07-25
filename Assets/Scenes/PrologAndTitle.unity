@@ -783,13 +783,13 @@ PrefabInstance:
       objectReference: {fileID: 1957239280}
     - target: {fileID: 4380409691912339065, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: typingText
-      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294\n\uC4F0\uB7EC\uC838\uC788\uB294
+      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uB2F9\uC2E0\uC740\n\uC4F0\uB7EC\uC838\uC788\uB294
         \uC778\uC5B4\uC5D0\uAC8C\n\uAC00\uC9C0\uACE0 \uC788\uB294 \uBE59\uC218\uB97C
         \uBA39\uC600\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 4380409691912339071, guid: 7f7071a94d60ec14c82b21f62eca917e, type: 3}
       propertyPath: m_Text
-      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uC544\uC800\uC528\uB294\n\uC4F0\uB7EC\uC838\uC788\uB294
+      value: " \uB9C8\uC74C\uC528 \uCC29\uD55C \uB2F9\uC2E0\uC740\n\uC4F0\uB7EC\uC838\uC788\uB294
         \uC778\uC5B4\uC5D0\uAC8C\n\uAC00\uC9C0\uACE0 \uC788\uB294 \uBE59\uC218\uB97C
         \uBA39\uC600\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
